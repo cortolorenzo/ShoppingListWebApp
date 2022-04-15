@@ -20,6 +20,31 @@ namespace API.Data
         }
 
       public DbSet<Product> Products { get; set; }
+      public DbSet<Unit> Units { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Product>()
+                .HasOne(p => p.Unit)
+                .WithMany(u => u.Products)
+                .HasForeignKey(p => p.UnitId)
+                
+               .IsRequired(false)
+               .OnDelete(DeleteBehavior.NoAction); // When I delete Product Unit will stay
+
+            builder.Entity<Unit>()
+                .HasMany(u => u.Products)
+                
+                .WithOne(p => p.Unit)
+                
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+        
+     
+        }
+
 
     }
 

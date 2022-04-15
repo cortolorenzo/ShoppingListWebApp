@@ -7,9 +7,22 @@ namespace API.Entities
 {
     public class Product
     {
+        public Product()
+        {
+        }
+
+        public Product( string productName, Unit unit)
+        {
         
-        public int Id { get; set; }
-        public string? ProductName { get; set; }
-        public int Units { get; set; }
+            ProductName = productName;
+           
+            Unit = unit;
+        }
+
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        
+        public int? UnitId { get; set; }
+        public Unit Unit { get; set; }
     }
 }

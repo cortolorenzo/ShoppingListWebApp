@@ -29,6 +29,20 @@ namespace API
                 // var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 // await context.Database.MigrateAsync();
                 // await Seed.SeedUsers(userManager, roleManager);
+                var unit = new Unit();
+                unit.UnitName = "kg";
+
+
+                var product = new Product("Potato", unit );
+                context.Add(product);
+                context.SaveChanges();
+
+                var unit1 = context.Units.Where(u => u.UnitId == 1).FirstOrDefault();
+                
+                context.Remove(unit1);
+                context.SaveChanges();
+
+
             }
             catch(Exception ex)
             {
