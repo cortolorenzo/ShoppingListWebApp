@@ -39,7 +39,7 @@ namespace API.Data
                 
                 .WithOne(p => p.Unit)
                 
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
         
      
