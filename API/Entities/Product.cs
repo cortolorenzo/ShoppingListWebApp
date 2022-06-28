@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace API.Entities
@@ -23,6 +24,8 @@ namespace API.Entities
         public string ProductName { get; set; }
         
         public int? UnitId { get; set; }
+
+        [JsonIgnore]
         public Unit Unit { get; set; }
     }
 }

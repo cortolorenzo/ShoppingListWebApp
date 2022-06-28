@@ -54,25 +54,25 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(policy => policy.WithOrigins("https://localhost:4200")
+            app.UseCors(policy => policy.WithOrigins("https://localhost:7251")
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
                                         .AllowCredentials());
 
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
 
-            //use index html
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            // //use index html
+            // app.UseDefaultFiles();
+            // app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 // endpoints.MapHub<PresenceHub>("hubs/presence");
                 // endpoints.MapHub<MessageHub>("hubs/message");
-                endpoints.MapFallbackToController("Index", "Fallback");
+                //endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
 
