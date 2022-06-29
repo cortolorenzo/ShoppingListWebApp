@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuMainComponent } from './menus/menu-main/menu-main.component';
 import { MenuMealsComponent } from './menus/menu-meals/menu-meals.component';
 import { MenuMakeListComponent } from './menus/menu-make-list/menu-make-list.component';
+import { MenuMealsProductsComponent } from './menus/menu-meals/menu-meals-products/menu-meals-products.component';
+import { MenuMealsMealsComponent } from './menus/menu-meals/menu-meals-meals/menu-meals-meals.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -21,6 +24,8 @@ import { MenuMakeListComponent } from './menus/menu-make-list/menu-make-list.com
     MenuMainComponent,
     MenuMealsComponent,
     MenuMakeListComponent,
+    MenuMealsProductsComponent,
+    MenuMealsMealsComponent,
 
     
     
@@ -28,7 +33,8 @@ import { MenuMakeListComponent } from './menus/menu-make-list/menu-make-list.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

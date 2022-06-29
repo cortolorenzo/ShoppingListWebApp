@@ -1,0 +1,29 @@
+<div class="background">
+    <div class="container" >
+
+
+        <div class="row">
+          
+            <table class="table table-hover" style="cursor: pointer">
+                <tr>
+                    <th style="width: 20%">Id</th>
+                    <th style="width: 60%">Product Name</th>
+                    <th style="width: 20%">Unit Id</th>
+                    
+                    
+                </tr>
+                <tr *ngFor="let product of products" >
+                    <td>{{product.Id}}</td>
+                    <td>{{product.productName}}</td>
+                    <td>{{product.unitId}}</td>
+         
+                </tr>
+        
+            </table>
+
+        </div>
+        
+
+    </div>
+    
+</div>

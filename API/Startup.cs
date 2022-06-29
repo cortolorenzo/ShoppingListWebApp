@@ -54,14 +54,15 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(policy => policy.WithOrigins("https://localhost:7251")
+            app.UseCors(policy => policy.WithOrigins("localhost:4200")
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
-                                        .AllowCredentials());
+                                        //.AllowCredentials()
+                                        );
 
 
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             // //use index html
             // app.UseDefaultFiles();
