@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/_models/product';
 import { MealsService } from 'src/app/_services/meals.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-menu-meals-products',
@@ -21,6 +22,8 @@ export class MenuMealsProductsComponent implements OnInit {
     this.mealService.getProducts().subscribe((response: any) => {
       this.products = response;
     })
+
+    console.log(environment.apiUrl + 'products');
   }
 
 }
