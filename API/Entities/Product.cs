@@ -25,7 +25,7 @@ namespace API.Entities
         
         public int? UnitId { get; set; }
 
-        [JsonIgnore]
+//        [JsonIgnore]
         public Unit Unit { get; set; }
     }
 }
