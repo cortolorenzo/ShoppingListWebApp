@@ -11,6 +11,8 @@ import { MenuMakeListComponent } from './menus/menu-make-list/menu-make-list.com
 import { MenuMealsProductsComponent } from './menus/menu-meals/menu-meals-products/menu-meals-products.component';
 import { MenuMealsMealsComponent } from './menus/menu-meals/menu-meals-meals/menu-meals-meals.component';
 import {HttpClientModule} from '@angular/common/http';
+import { EditProductModalComponent } from './modals/edit-product/edit-product-modal/edit-product-modal.component';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -26,6 +28,7 @@ import {HttpClientModule} from '@angular/common/http';
     MenuMakeListComponent,
     MenuMealsProductsComponent,
     MenuMealsMealsComponent,
+    EditProductModalComponent,
 
     
     
@@ -34,9 +37,10 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule
   ],
-  providers: [],
+  providers: [BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
