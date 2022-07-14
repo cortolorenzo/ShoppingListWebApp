@@ -4,13 +4,14 @@
 
         <!-- <div class="row"> -->
           
-            <table class="table table-hover" style="cursor: pointer">
+            <table class="table table-hover" style="cursor: default">
                 <thead>
                     <tr>
-                        <th style="width: 20%">Id</th>
-                        <th style="width: 60%">Product Name</th>
+                        <th style="width: 10%">Id</th>
+                        <th style="width: 30%">Product Name</th>
                         <th style="width: 20%">Unit</th>
-                        
+                        <th style="width: 5%"></th>
+                        <th style="width: 5%"></th>
                         
                     </tr>
                 </thead>
@@ -18,7 +19,10 @@
                     <td>{{product.productId}}</td>
                     <td>{{product.productName}}</td>
                     <td>{{product.unitName}}</td>
-                    <td><button (click)="openEditProductModal(product)" class="btn-hover color-1">Edit Product</button></td>
+                    <td>
+                        <button (click)="openEditProductModal(product)" class="btn-hover color-1">Edit</button></td>
+                       <td> <button (click)="openEditProductModal(product)" class="btn-hover btn-danger">Delete</button></td>
+                    
          
                 </tr>
         

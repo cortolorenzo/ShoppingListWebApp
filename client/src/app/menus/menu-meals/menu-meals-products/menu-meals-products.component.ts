@@ -36,7 +36,10 @@ export class MenuMealsProductsComponent implements OnInit {
     }
 
     this.bsModalRef = this.modalService.show(EditProductModalComponent, config);
+    this.bsModalRef.content.updateSelectedProduct.subscribe((values: any[]) => {
+      console.log(values);
 
+    })
   }
 
 }

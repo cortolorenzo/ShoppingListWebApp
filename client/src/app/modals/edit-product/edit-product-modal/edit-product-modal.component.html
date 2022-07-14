@@ -7,20 +7,14 @@
 </div>
 
 <div class="modal-body">
-    <!-- <form #rolesForm="ngForm" id="rolesForm">
-        <div class="form-check"*ngFor="let role of roles">
-            <input type="checkbox"
-                class="form-check-input"
-                [checked]="role.checked"
-                value="role.name"
-                (change)="role.checked = !role.checked"
-                [disabled]="role.name ==='Admin' && user.username ==='admin'"
-            >
-            <label>{{role.name}}</label>
-        </div>
-    </form> -->
+   <form #productForm="ngForm" id="productForm" >
+        <p>Product name:</p>
+        <textarea name="productName" [(ngModel)]="product.productName" rows="1" class="form-control"></textarea>
+
+
+   </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-    <!-- <button type="button" class="btn btn-success" (click)="updateRoles()">Submit</button> -->
+    <button type="button" class="btn btn-success" (click)="updateProduct()">Submit</button>
   </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     MenuMealsMealsComponent,
     EditProductModalComponent,
 
+
     
     
   ],
@@ -38,7 +40,9 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ModalModule
+    ModalModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]
