@@ -18,5 +18,15 @@ namespace API.Data
         }
 
         public IProductRepository ProductRepository => new ProductRepository(Context, Mapper);
+
+         public async Task<bool> Complete()
+        {
+            return await Context.SaveChangesAsync() > 0;
+        }
+
+        public bool HasChanges()
+        {
+            return Context.ChangeTracker.HasChanges();
+        }
     }
 }

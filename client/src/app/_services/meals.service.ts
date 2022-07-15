@@ -17,4 +17,11 @@ export class MealsService {
     return this.http.get<Product>(this.baseUrl + 'products');
     
   }
+
+  updateProduct(product: Product){
+
+    console.log("jestem");
+    return this.http.put(this.baseUrl + 'products', product).subscribe();
+   
+  }
 }

@@ -34,10 +34,24 @@ export class MenuMealsProductsComponent implements OnInit {
       class: 'modal-dialog-centered',
       initialState:{ product}
     }
+    const tempProduct: Product = product; 
 
     this.bsModalRef = this.modalService.show(EditProductModalComponent, config);
     this.bsModalRef.content.updateSelectedProduct.subscribe((values: any[]) => {
-      console.log(values);
+      
+      if (values.find(x => x.name == "canceled").value == 1)
+        product = tempProduct;
+      else
+      {
+        product.productName = values.find(x => x.name == "productName").value;
+        this.mealService.updateProduct(product);
+        console.log(product);
+      }
+        
+        
+     
+      
+
 
     })
   }

@@ -12,19 +12,29 @@ import { Product } from 'src/app/_models/product';
 export class EditProductModalComponent implements OnInit {
 
   product: Product;
+
+  productName: string;
+  productId: number;
   @Input() updateSelectedProduct = new EventEmitter();
 
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+    this.productName = this.product.productName
+
   }
 
 
-  updateProduct(){
+
+
+  updateProduct(canceled: boolean){
     const product: any = 
     [
-      {name: 'productName', value: this.product.productName},
-      {name: 'unitName', value: this.product.unitName}
+      {name: 'productName', value: this.productName},
+      // {name: 'unitName', value: this.product.unitName}
+      {name: 'productId', value: this.product.productId},
+      {name: 'canceled', value: canceled ? 1 : 0}
+      
     ];
 
     this.updateSelectedProduct.emit(product);

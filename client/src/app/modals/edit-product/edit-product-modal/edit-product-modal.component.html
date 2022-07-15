@@ -9,12 +9,12 @@
 <div class="modal-body">
    <form #productForm="ngForm" id="productForm" >
         <p>Product name:</p>
-        <textarea name="productName" [(ngModel)]="product.productName" rows="1" class="form-control"></textarea>
+        <textarea name="productName" [(ngModel)]="productName" rows="1" class="form-control"></textarea>
 
 
    </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-    <button type="button" class="btn btn-success" (click)="updateProduct()">Submit</button>
+    <button type="button" class="btn btn-default" (click)="updateProduct(true)">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="updateProduct(false)">Submit</button>
   </div>
