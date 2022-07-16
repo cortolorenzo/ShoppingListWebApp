@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Add product</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+
+</div>
+
+<div class="modal-body">
+   <form #productForm="ngForm" id="productForm" >
+        <p>Product name:</p>
+        <textarea name="productName" [(ngModel)]="productName" rows="1" class="form-control"></textarea>
+
+        <p>Product units:</p>
+        <textarea name="unitName" [(ngModel)]="unitName" rows="1" class="form-control"></textarea>
+
+
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="addProduct(true)">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="addProduct(false)">Submit</button>
+  </div>

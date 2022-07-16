@@ -13,10 +13,10 @@ namespace API.Data
         public static async Task SeedData(DataContext dataContext)
         {
             if (dataContext.Products.Any())
-            {
                 Clear(dataContext.Products);
+            if (dataContext.Units.Any())
                 Clear(dataContext.Units);
-            }
+            
             
             await SeedUnits(dataContext);
             await SeedProducts(dataContext);

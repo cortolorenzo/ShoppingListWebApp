@@ -14,6 +14,7 @@ import { MenuMealsMealsComponent } from './menus/menu-meals/menu-meals-meals/men
 import {HttpClientModule} from '@angular/common/http';
 import { EditProductModalComponent } from './modals/edit-product/edit-product-modal/edit-product-modal.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { AddProductModalComponent } from './modals/edit-product/add-product-modal/add-product-modal.component';
 
 
 
@@ -30,6 +31,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     MenuMealsProductsComponent,
     MenuMealsMealsComponent,
     EditProductModalComponent,
+    AddProductModalComponent,
 
 
     

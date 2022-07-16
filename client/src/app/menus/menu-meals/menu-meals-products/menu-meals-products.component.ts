@@ -4,6 +4,7 @@ import { MealsService } from 'src/app/_services/meals.service';
 import { environment } from 'src/environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditProductModalComponent } from 'src/app/modals/edit-product/edit-product-modal/edit-product-modal.component';
+import { AddProductModalComponent } from 'src/app/modals/edit-product/add-product-modal/add-product-modal.component';
 
 @Component({
   selector: 'app-menu-meals-products',
@@ -36,6 +37,33 @@ export class MenuMealsProductsComponent implements OnInit {
   }
 
 
+  openAddProductModal(){
+    const config ={
+      class: 'modal-dialog-centered'
+      
+    }
+  
+    this.bsModalRef = this.modalService.show(AddProductModalComponent, config);
+    this.bsModalRef.content.addNewProduct.subscribe((values: any[]) => {
+      if (values.find(x => x.name == "cancelled").value == 1)
+        return;
+      else
+      {
+        const newProduct: Product = {
+          productId:  0,
+          productName: values.find(x => x.name == "productName").value,
+          unitName: values.find(x => x.name == "unitName").value
+        }
+
+        this.mealService.addProduct(newProduct).subscribe(() =>{
+          this.loadProducts();
+        });
+        console.log(newProduct);
+      }
+    })
+    
+    }
+
   openEditProductModal(product: Product){
     const config ={
       class: 'modal-dialog-centered',
@@ -51,7 +79,7 @@ export class MenuMealsProductsComponent implements OnInit {
       else
       {
         product.productName = values.find(x => x.name == "productName").value;
-        this.mealService.updateProduct(product);
+        this.mealService.updateProduct(product).subscribe();
         console.log(product);
       }
         

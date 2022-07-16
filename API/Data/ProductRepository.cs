@@ -41,5 +41,22 @@ namespace API.Data
         {
             _dataContext.Remove(product);
         }
+
+        public void AddProduct(Product product)
+        {
+            _dataContext.Add(product);
+            
+            
+        }
+
+        public async Task<Unit> GetUnitByUnitName(string unitName)
+        {
+            return await _dataContext.Units.SingleOrDefaultAsync(x => x.UnitName == unitName);
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            _dataContext.Add(unit);
+        }
     }
 }

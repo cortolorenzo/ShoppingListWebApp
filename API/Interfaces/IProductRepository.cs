@@ -15,5 +15,11 @@ namespace API.Interfaces
          void UpdateProduct(Product product);
 
          void DeleteProduct(Product product);
+
+         void AddProduct(Product product);
+
+         Task <Unit> GetUnitByUnitName(string unitName);
+
+         void AddUnit(Unit unit);
     }
 }

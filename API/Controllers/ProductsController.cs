@@ -53,5 +53,28 @@ namespace API.Controllers
             return BadRequest("Problem deleting product");
         }
 
+
+        [HttpPost]
+        public async Task<ActionResult> AddProduct(ProductDto productDto)
+        {
+            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(productDto.UnitName);
+
+            if (unit == null)
+            {
+                unit = new Unit(productDto.UnitName);
+                unitOfWork.ProductRepository.AddUnit(unit);
+            }
+                
+            
+            var product = new Product(productDto.ProductName, unit);
+           
+            unitOfWork.ProductRepository.AddProduct(product);
+            
+            if (await unitOfWork.Complete()) 
+                return Ok();
+            return BadRequest("Failed to send message");
+
+        }
+
     }
 }

@@ -3,6 +3,5 @@
         
         productId: number;
         productName: string;
-        unitId: number;
         unitName: string;
     }

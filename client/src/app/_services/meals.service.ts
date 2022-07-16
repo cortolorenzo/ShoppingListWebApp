@@ -18,10 +18,15 @@ export class MealsService {
     
   }
 
+  addProduct(product: Product){
+    console.log("nowy produkt")
+    return this.http.post<Product>(this.baseUrl + 'products', product);
+  }
+
   updateProduct(product: Product){
 
     console.log("jestem");
-    return this.http.put(this.baseUrl + 'products', product).subscribe();
+    return this.http.put(this.baseUrl + 'products', product)
    
   }
 
