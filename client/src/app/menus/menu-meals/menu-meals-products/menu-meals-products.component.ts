@@ -29,6 +29,13 @@ export class MenuMealsProductsComponent implements OnInit {
     console.log(environment.apiUrl + 'products');
   }
 
+  deleteProduct(productId: number){
+    this.mealService.deleteProduct(productId).subscribe(() => {
+      this.products.splice(this.products.findIndex(x => x.productId === productId),1);
+    });
+  }
+
+
   openEditProductModal(product: Product){
     const config ={
       class: 'modal-dialog-centered',
@@ -48,11 +55,6 @@ export class MenuMealsProductsComponent implements OnInit {
         console.log(product);
       }
         
-        
-     
-      
-
-
     })
   }
 

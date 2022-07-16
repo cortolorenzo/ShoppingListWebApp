@@ -36,9 +36,22 @@ namespace API.Controllers
             _mapper.Map(productDto, product);
 
             unitOfWork.ProductRepository.UpdateProduct(product);
+
             if (await unitOfWork.Complete()) return NoContent();
             return BadRequest("Failes to update product");
 
         }
+
+        [HttpDelete("{productId}")]
+        public async Task<ActionResult> DeleteProduct(int productId)
+        {
+            var product = await unitOfWork.ProductRepository.GetProductByIdAsync(productId);
+            unitOfWork.ProductRepository.DeleteProduct(product);
+
+            if (await unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Problem deleting product");
+        }
+
     }
 }

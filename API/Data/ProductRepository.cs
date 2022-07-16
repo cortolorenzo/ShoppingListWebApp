@@ -36,5 +36,10 @@ namespace API.Data
         {
             _dataContext.Entry(product).State = EntityState.Modified;
         }
+
+        public void DeleteProduct(Product product)
+        {
+            _dataContext.Remove(product);
+        }
     }
 }

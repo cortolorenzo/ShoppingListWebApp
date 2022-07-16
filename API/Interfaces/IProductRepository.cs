@@ -12,6 +12,8 @@ namespace API.Interfaces
         Task<IEnumerable<ProductDto>> GetProductsAsync();
 
          Task<Product?> GetProductByIdAsync(int productId);
-         void UpdateProduct(Product Product);
+         void UpdateProduct(Product product);
+
+         void DeleteProduct(Product product);
     }
 }

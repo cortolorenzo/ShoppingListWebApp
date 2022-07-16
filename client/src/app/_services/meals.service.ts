@@ -24,4 +24,10 @@ export class MealsService {
     return this.http.put(this.baseUrl + 'products', product).subscribe();
    
   }
+
+  deleteProduct(productId: number){
+    console.log("kasuję: "+ this.baseUrl + 'products/' + productId);
+    return this.http.delete(this.baseUrl + 'products/' + productId);
+  }
+
 }

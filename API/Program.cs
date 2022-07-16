@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
@@ -59,6 +60,14 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel(kestrelOptions =>
+                    {
+                        kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
+                        {
+                            httpsOptions.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
+                        });
+                    });
+                    
                     webBuilder.UseStartup<Startup>();
                 });
     }
