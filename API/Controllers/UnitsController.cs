@@ -39,5 +39,24 @@ namespace API.Controllers
 
             return BadRequest("Problem deleting unit");
         }
+
+        [HttpPost("{unitName}")]
+        public async Task<ActionResult> AddUnit(string unitName)
+        {
+            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(unitName);
+
+            if (unit == null)
+            {
+                unit = new Unit(unitName);
+                unitOfWork.ProductRepository.AddUnit(unit);
+                 
+                if (await unitOfWork.Complete()) 
+                    return Ok(unit);
+            }
+              
+            return BadRequest("Unit already exists");
+
+        }
+
     }
 }

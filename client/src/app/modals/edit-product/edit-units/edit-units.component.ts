@@ -13,7 +13,8 @@ export class EditUnitsComponent implements OnInit {
 
   result: boolean = false;
   units: Unit[];
-  
+  newUnitName: string;
+  newUnit: Unit;
   constructor(private mealService: MealsService,
                  private confirmService: ConfirmService
                  ,public bsModalRef: BsModalRef) { }
@@ -37,6 +38,24 @@ export class EditUnitsComponent implements OnInit {
       }
     })
    
+  }
+
+  addUnit()
+  {
+    if (this.newUnitName.length > 0) 
+    {
+      this.mealService.addUnit(this.newUnitName).subscribe((res: any) => {
+
+        this.newUnit = res;
+        this.units.push(this.newUnit);
+
+        console.log(res);
+        
+        this.newUnitName = "";
+
+    });
+    }
+    
   }
 
   decline(){

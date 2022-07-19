@@ -19,7 +19,7 @@ export class MealsService {
 
   editUnitsOpenModal(units: Unit[]) : Observable<boolean> {
     const config ={
-      class: 'modal-dialog-centered modal-sm',
+      class: 'modal-lm',
       initialState : {units}
     }
     this.bsModalRef = this.modalService.show(EditUnitsComponent,config);
@@ -60,6 +60,12 @@ export class MealsService {
     console.log("nowy produkt")
     return this.http.post<Product>(this.baseUrl + 'products', product);
   }
+
+  addUnit(unitName: string){
+    console.log(unitName)
+    return this.http.post(this.baseUrl + 'units/' + unitName, unitName);
+  }
+
 
   updateProduct(product: Product){
 

@@ -62,7 +62,7 @@ export class MenuMealsProductsComponent implements OnInit {
 
   openAddProductModal(){
     const config ={
-      class: 'modal-dialog-centered',
+      class: 'modal-dialog-centered modal-ms',
       
       
     }

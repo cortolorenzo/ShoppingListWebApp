@@ -1,3 +1,7 @@
+<div class="blue-dialog">
+
+
+
 <div class="modal-header">
     <h4 class="modal-title pull-left">Edit units</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
@@ -27,6 +31,14 @@
 
 </table>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-success"click (click)="decline()">Close</button>
+<!-- <div class="modal-footer" row="1"> -->
+    <div class="footer">
+        <textarea  class="item form-control"  name="unitName" [(ngModel)]="newUnitName" style="min-width: 40%" ></textarea>
+        <button   type="button" class="btn btn-success item" (click)="addUnit()" >Add Unit</button>
+        <button   type="button" class="btn btn-success item"  (click)="decline()">Close</button>
+
+    </div>
+    
+<!-- </div> -->
+
 </div>

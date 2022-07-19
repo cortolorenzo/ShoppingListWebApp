@@ -25,6 +25,23 @@
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
 }
+.footer{
+    display: flex;
+}
+
+.item{
+  
+    flex: 1;
+    margin: 15px;
+    height: 40px;
+    
+
+}
+
+  
+.blue-dialog {
+    background-color: rgb(241, 241, 247);
+  }
 
 .btn-hover:focus {
     outline: none;
