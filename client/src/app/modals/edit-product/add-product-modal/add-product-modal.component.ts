@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/_models/product';
+import { Unit } from 'src/app/_models/unit';
+import { MealsService } from 'src/app/_services/meals.service';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -12,12 +14,21 @@ export class AddProductModalComponent implements OnInit {
 
   productName: string;
   unitName: string;
+  units: Unit[];
 
   @Input() addNewProduct = new EventEmitter();
-  constructor(public bsModalRef: BsModalRef) { }
+  constructor(public bsModalRef: BsModalRef, private mealService: MealsService) { }
 
   ngOnInit(): void {
+
+    
   }
+
+  updateUnitName(uniName: string){
+    this.unitName = uniName
+  }
+
+  
 
   addProduct(cancelled: boolean){
 
@@ -32,5 +43,16 @@ export class AddProductModalComponent implements OnInit {
     this.addNewProduct.emit(product);
     this.bsModalRef.hide();
   }
+
+  openEditUnitsModal(units: Unit[]){
+    this.mealService.editUnitsOpenModal(units).subscribe(res =>{
+      if(res){
+        console.log("deleted");
+        
+      }
+    })
+  }
+
+
 
 }

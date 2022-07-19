@@ -15,6 +15,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { EditProductModalComponent } from './modals/edit-product/edit-product-modal/edit-product-modal.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { AddProductModalComponent } from './modals/edit-product/add-product-modal/add-product-modal.component';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { EditUnitsComponent } from './modals/edit-product/edit-units/edit-units.component';
 
 
 
@@ -32,6 +35,8 @@ import { AddProductModalComponent } from './modals/edit-product/add-product-moda
     MenuMealsMealsComponent,
     EditProductModalComponent,
     AddProductModalComponent,
+    ConfirmDialogComponent,
+    EditUnitsComponent,
 
 
     
@@ -45,6 +50,7 @@ import { AddProductModalComponent } from './modals/edit-product/add-product-moda
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]

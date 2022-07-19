@@ -11,6 +11,26 @@
         <p>Product name:</p>
         <textarea name="productName" [(ngModel)]="productName" rows="1" class="form-control"></textarea>
 
+        <p>Product units dopdown:</p>
+        <div class="btn-group" dropdown>
+          <textarea name="unitName" [(ngModel)]="unitName" rows="1" class="form-control"></textarea>
+          <button id="button-split" type="button" dropdownToggle class="btn btn-default dropdown-toggle dropdown-toggle-split"
+                  aria-controls="dropdown-split">
+            <span class="caret"></span>
+            <span class="sr-only visually-hidden">Split button!</span>
+          </button>
+          <ul id="dropdown-split" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-split" >
+
+            <li role="menuitem" *ngFor="let unit of units">
+              <a class="dropdown-item" (click)="updateUnitName(unit.unitName)">{{unit.unitName}}</a>
+            </li>
+    
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="openEditUnitsModal(units)">Edit units</a> 
+            </li> 
+          </ul>
+        </div>
 
    </form>
   </div>

@@ -10,11 +10,14 @@ namespace API.Interfaces
     public interface IProductRepository
     {
         Task<IEnumerable<ProductDto>> GetProductsAsync();
+        Task<IEnumerable<UnitDto>> GetUnitsAsync();
 
          Task<Product?> GetProductByIdAsync(int productId);
          void UpdateProduct(Product product);
 
          void DeleteProduct(Product product);
+
+         void DeleteUnit(Unit unit);
 
          void AddProduct(Product product);
 

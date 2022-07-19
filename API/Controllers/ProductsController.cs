@@ -32,8 +32,18 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateProduct(ProductDto productDto)
         {
+            //check if new unit was added
+            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(productDto.UnitName);
+            if (unit == null)
+            {
+                unit = new Unit(productDto.UnitName);
+                unitOfWork.ProductRepository.AddUnit(unit);
+            }
+            
             var product = await unitOfWork.ProductRepository.GetProductByIdAsync(productDto.ProductId);
             _mapper.Map(productDto, product);
+
+            product.Unit = unit;
 
             unitOfWork.ProductRepository.UpdateProduct(product);
 

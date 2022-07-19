@@ -58,5 +58,17 @@ namespace API.Data
         {
             _dataContext.Add(unit);
         }
+
+        public async Task<IEnumerable<UnitDto>> GetUnitsAsync()
+        {
+            var units = await _mapper.ProjectTo<UnitDto>(_dataContext.Units).ToListAsync();
+            
+            return  units;
+        }
+
+        public void DeleteUnit(Unit unit)
+        {
+            _dataContext.Remove(unit);
+        }
     }
 }
