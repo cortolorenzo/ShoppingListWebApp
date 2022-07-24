@@ -20,7 +20,7 @@ export class ConfirmService {
   btnOkText = 'Ok', 
   btnCancelText = 'Cancel') : Observable<boolean>{
     const config = {
-      class: 'modal-dialog-centered',
+      class: 'modal-dialog-centered modal-lg',
       initialState: {
         title,
         message,

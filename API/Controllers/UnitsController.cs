@@ -24,17 +24,23 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UnitDto>>> GetUnits()
         {
-            var units = await unitOfWork.ProductRepository.GetUnitsAsync();
+            var units = await unitOfWork.UnitRepository.GetUnitsAsync();
             return Ok(units);
         }
 
 
-          [HttpDelete("{unitName}")]
+        [HttpDelete("{unitName}")]
         public async Task<ActionResult> DeleteUnit(string unitName)
         {
-            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(unitName);
-            unitOfWork.ProductRepository.DeleteUnit(unit);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName);
+            unitOfWork.UnitRepository.DeleteUnit(unit);
 
+            if( await unitOfWork.UnitRepository.IsUnitUsed(unitName))
+                return BadRequest("Unit: " + unitName +", is already used in some product definition." +
+                
+                " If you want to delete it please firstly delete the corresponding product.");
+
+            
             if (await unitOfWork.Complete()) return Ok();
 
             return BadRequest("Problem deleting unit");
@@ -43,12 +49,12 @@ namespace API.Controllers
         [HttpPost("{unitName}")]
         public async Task<ActionResult> AddUnit(string unitName)
         {
-            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(unitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName);
 
             if (unit == null)
             {
                 unit = new Unit(unitName);
-                unitOfWork.ProductRepository.AddUnit(unit);
+                unitOfWork.UnitRepository.AddUnit(unit);
                  
                 if (await unitOfWork.Complete()) 
                     return Ok(unit);

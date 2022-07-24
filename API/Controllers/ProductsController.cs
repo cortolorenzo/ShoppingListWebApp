@@ -33,11 +33,11 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateProduct(ProductDto productDto)
         {
             //check if new unit was added
-            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(productDto.UnitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName);
             if (unit == null)
             {
                 unit = new Unit(productDto.UnitName);
-                unitOfWork.ProductRepository.AddUnit(unit);
+                unitOfWork.UnitRepository.AddUnit(unit);
             }
             
             var product = await unitOfWork.ProductRepository.GetProductByIdAsync(productDto.ProductId);
@@ -67,12 +67,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddProduct(ProductDto productDto)
         {
-            var unit = await unitOfWork.ProductRepository.GetUnitByUnitName(productDto.UnitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName);
 
             if (unit == null)
             {
                 unit = new Unit(productDto.UnitName);
-                unitOfWork.ProductRepository.AddUnit(unit);
+                unitOfWork.UnitRepository.AddUnit(unit);
             }
                 
             

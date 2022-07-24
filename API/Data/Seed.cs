@@ -16,10 +16,70 @@ namespace API.Data
                 Clear(dataContext.Products);
             if (dataContext.Units.Any())
                 Clear(dataContext.Units);
+
+            if (dataContext.Recipes.Any())
+                Clear(dataContext.Recipes);
+
+            if (dataContext.RecipeProducts.Any())
+                Clear(dataContext.RecipeProducts);
             
             
             await SeedUnits(dataContext);
             await SeedProducts(dataContext);
+            await SeedRecipes(dataContext);
+            await SeedRecipesProducts(dataContext);
+        }
+
+        private static async Task SeedRecipesProducts(DataContext dataContext)
+        {
+            try
+            {
+                var recipeProducts = new List<RecipeProduct>
+                {
+                    new RecipeProduct(1,1),
+                    new RecipeProduct(1,2),
+                    new RecipeProduct(1,3),
+
+                    new RecipeProduct(2,1),
+                    new RecipeProduct(2,2),
+
+                    new RecipeProduct(3,1),
+
+                };
+
+                foreach (var recipeProduct in recipeProducts)
+                {
+                    dataContext.RecipeProducts.Add(recipeProduct);
+                    await dataContext.SaveChangesAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        private static  async Task SeedRecipes(DataContext dataContext)
+        {
+            try
+            {
+                var recipes = new List<Recipe>
+                {
+                    new Recipe("Schabowy"),
+                    new Recipe("Owsianka"),
+                    new Recipe("Sałatka grecka")
+                };
+
+                foreach (var recipe in recipes)
+                {
+                    dataContext.Recipes.Add(recipe);
+                    await dataContext.SaveChangesAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public static void Clear<T>(this DbSet<T> dbSet) where T : class

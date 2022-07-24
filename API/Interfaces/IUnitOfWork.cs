@@ -8,6 +8,7 @@ namespace API.Interfaces
     public interface IUnitOfWork
     {
         IProductRepository ProductRepository {get;}
+        IUnitRepository UnitRepository {get;}
 
         Task<bool> Complete();
 

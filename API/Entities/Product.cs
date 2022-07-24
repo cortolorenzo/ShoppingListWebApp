@@ -27,5 +27,8 @@ namespace API.Entities
 
 //        [JsonIgnore]
         public Unit Unit { get; set; }
+
+        public  ICollection<RecipeProduct> RecipeProducts { get; set; }
+
     }
 }

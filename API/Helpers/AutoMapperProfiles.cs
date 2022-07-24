@@ -16,6 +16,12 @@ namespace API.Helpers
                 .ForMember(dest => dest.UnitName,opt => opt.MapFrom(src => src.Unit.UnitName));
             CreateMap<ProductDto, Product>();
             CreateMap<Unit, UnitDto>();
+            
+            CreateMap<RecipeProduct, RecipeProductDto>()
+                // .ForMember(dest => dest.RecipeName, opt => opt.MapFrom(src => src.Recipe.RecipieName))
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.ProductName));
+            
+            CreateMap<RecipeProductDto, RecipeProduct>();
         }
         
         

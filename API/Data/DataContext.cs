@@ -22,6 +22,9 @@ namespace API.Data
       public DbSet<Product> Products { get; set; }
       public DbSet<Unit> Units { get; set; }
 
+      public DbSet<RecipeProduct> RecipeProducts { get; set; }
+      public DbSet<Recipe> Recipes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -40,6 +43,22 @@ namespace API.Data
                 .WithOne(p => p.Unit)
                 
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Recipe>()
+                .HasKey(p => p.RecipieId);
+
+            builder.Entity<RecipeProduct>()
+                .HasKey(rp => rp.RecipeProductId);
+            builder.Entity<RecipeProduct>()
+                .HasOne(rp => rp.Recipe)
+                .WithMany(r => r.RecipeProducts)
+                .HasForeignKey(rp => rp.RecipeId);
+            builder.Entity<RecipeProduct>()
+                .HasOne(rp => rp.Product)
+                .WithMany(rp => rp.RecipeProducts)
+                .HasForeignKey(rp => rp.ProductId);
+            
+
 
         
      

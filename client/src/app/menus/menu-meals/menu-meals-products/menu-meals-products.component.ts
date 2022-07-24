@@ -7,6 +7,8 @@ import { EditProductModalComponent } from 'src/app/modals/edit-product/edit-prod
 import { AddProductModalComponent } from 'src/app/modals/edit-product/add-product-modal/add-product-modal.component';
 import { ConfirmService } from 'src/app/_services/confirm.service';
 import { Unit } from 'src/app/_models/unit';
+import { map, take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu-meals-products',
@@ -20,7 +22,7 @@ export class MenuMealsProductsComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   constructor(private mealService: MealsService,  private modalService: BsModalService
-    ,private confirmService: ConfirmService) { }
+    ,private confirmService: ConfirmService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -29,8 +31,14 @@ export class MenuMealsProductsComponent implements OnInit {
 
   loadProducts(){
     this.mealService.getProducts().subscribe((response: any) => {
+      console.log(response);
       this.products = response;
     })
+
+    // this.mealService.getProducts().pipe(map((response: Product[]) => {
+    //    console.log(response)
+    //   this.products = response;
+    // })).subscribe();
 
     console.log(environment.apiUrl + 'products');
   }
@@ -52,6 +60,7 @@ export class MenuMealsProductsComponent implements OnInit {
       if(result) {
         this.mealService.deleteProduct(productId).subscribe(() => {
           this.products.splice(this.products.findIndex(x => x.productId === productId),1);
+          this.toastr.success("Product deleted!");
         });
 
       }
@@ -83,6 +92,9 @@ export class MenuMealsProductsComponent implements OnInit {
         this.mealService.addProduct(newProduct).subscribe(() =>{
           this.loadProducts();
           this.loadUnits();
+          this.toastr.success("New product added!");
+          
+
         });
         console.log(newProduct);
       }
@@ -107,7 +119,10 @@ export class MenuMealsProductsComponent implements OnInit {
       {
         product.productName = values.find(x => x.name == "productName").value;
         product.unitName = values.find(x => x.name == "unitName").value;
-        this.mealService.updateProduct(product).subscribe();
+        this.mealService.updateProduct(product).subscribe(() =>{
+          this.toastr.success("Product updated!");
+        });
+      
         console.log(product);
       }
         
