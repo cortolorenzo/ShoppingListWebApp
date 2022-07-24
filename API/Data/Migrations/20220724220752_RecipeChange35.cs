@@ -4,7 +4,7 @@
 
 namespace API.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class RecipeChange35 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,13 +12,14 @@ namespace API.Data.Migrations
                 name: "Recipes",
                 columns: table => new
                 {
-                    RecipieId = table.Column<int>(type: "INTEGER", nullable: false)
+                    RecipeId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RecipieName = table.Column<string>(type: "TEXT", nullable: false)
+                    RecipeName = table.Column<string>(type: "TEXT", nullable: false),
+                    RecipeDescription = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipes", x => x.RecipieId);
+                    table.PrimaryKey("PK_Recipes", x => x.RecipeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +61,9 @@ namespace API.Data.Migrations
                     RecipeProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UnitName = table.Column<string>(type: "TEXT", nullable: true),
+                    Quantity = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +78,7 @@ namespace API.Data.Migrations
                         name: "FK_RecipeProducts_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
-                        principalColumn: "RecipieId",
+                        principalColumn: "RecipeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

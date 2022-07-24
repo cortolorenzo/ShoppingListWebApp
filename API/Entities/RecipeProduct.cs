@@ -13,10 +13,11 @@ namespace API.Entities
         Product = product;
       }
 
-        public RecipeProduct(int recipeId, int productId) 
+        public RecipeProduct(int recipeId, int productId, double quantity) 
         {
             this.RecipeId = recipeId;
             this.ProductId = productId;
+            this.Quantity = quantity;
    
         }
         
@@ -25,7 +26,7 @@ namespace API.Entities
         public Recipe Recipe { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public string UnitName { get; set; }
+        public string? UnitName { get; set; }
         public double Quantity { get; set; }
         
         

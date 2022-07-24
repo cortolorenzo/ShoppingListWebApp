@@ -9,6 +9,7 @@ namespace API.Interfaces
     {
         IProductRepository ProductRepository {get;}
         IUnitRepository UnitRepository {get;}
+        IRecipeRepository RecipeRepository {get;}
 
         Task<bool> Complete();
 

@@ -9,13 +9,18 @@ namespace API.Entities
     {
         public Recipe(string recipieName)
         {
-            RecipieName = recipieName;
+            RecipeName = recipieName;
+        }
+
+        public Recipe()
+        {
+            
         }
 
 
-        public int RecipieId { get; set; }
-        public string RecipieName { get; set; }
-        public string RecipeDescription { get; set; }
+        public int RecipeId { get; set; }
+        public string RecipeName { get; set; }
+        public string? RecipeDescription { get; set; }
         
 
        

@@ -39,19 +39,18 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Recipe", b =>
                 {
-                    b.Property<int>("RecipieId")
+                    b.Property<int>("RecipeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("RecipeDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RecipeName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RecipieName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("RecipieId");
+                    b.HasKey("RecipeId");
 
                     b.ToTable("Recipes");
                 });
@@ -72,7 +71,6 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UnitName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("RecipeProductId");

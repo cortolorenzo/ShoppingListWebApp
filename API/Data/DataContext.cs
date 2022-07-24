@@ -45,7 +45,7 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Recipe>()
-                .HasKey(p => p.RecipieId);
+                .HasKey(p => p.RecipeId);
 
             builder.Entity<RecipeProduct>()
                 .HasKey(rp => rp.RecipeProductId);
