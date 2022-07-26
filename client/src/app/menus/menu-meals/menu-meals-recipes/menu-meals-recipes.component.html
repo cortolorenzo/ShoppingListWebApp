@@ -1,0 +1,20 @@
+<div class="background">
+    <div class="container" >
+
+        <div class="add-recipe">
+            <button href  = "#" class="btn-hover color-2">Add Recipe</button>
+            
+        </div>
+
+       
+
+        <div class="row">
+            <div *ngFor="let recipe of recipes" class="col-2">
+                <app-recipe-card [recipe]="recipe"></app-recipe-card>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

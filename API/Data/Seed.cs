@@ -12,22 +12,25 @@ namespace API.Data
 
         public static async Task SeedData(DataContext dataContext)
         {
-            if (dataContext.Products.Any())
-                Clear(dataContext.Products);
-            if (dataContext.Units.Any())
-                Clear(dataContext.Units);
+            // if (dataContext.Products.Any())
+            //     Clear(dataContext.Products);
+                
+            // if (dataContext.Units.Any())
+            //     Clear(dataContext.Units);
 
-            if (dataContext.Recipes.Any())
-                Clear(dataContext.Recipes);
+            // if (dataContext.RecipeProducts.Any())
+            //     Clear(dataContext.RecipeProducts);
 
-            if (dataContext.RecipeProducts.Any())
-                Clear(dataContext.RecipeProducts);
+            // if (dataContext.Recipes.Any())
+            //     Clear(dataContext.Recipes);
+
+
             
             
-            await SeedUnits(dataContext);
-            await SeedProducts(dataContext);
-            await SeedRecipes(dataContext);
-            await SeedRecipesProducts(dataContext);
+            // await SeedUnits(dataContext);
+            // await SeedProducts(dataContext);
+            // await SeedRecipes(dataContext);
+            // await SeedRecipesProducts(dataContext);
         }
 
         private static async Task SeedRecipesProducts(DataContext dataContext)

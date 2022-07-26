@@ -70,5 +70,15 @@ namespace API.Data
         {
             _dataContext.Remove(unit);
         }
+
+        public async Task<bool> IsProductUsed(int productId)
+        {
+            var recipeProducts = await _dataContext.RecipeProducts
+                                    .Where(x => x.ProductId == productId)
+                                    .ToListAsync();
+            if (recipeProducts.Any())
+                return true;
+            return false;
+        }
     }
 }

@@ -29,7 +29,10 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
+
+
             builder.Entity<Product>()
+                
                 .HasOne(p => p.Unit)
                 .WithMany(u => u.Products)
                 .HasForeignKey(p => p.UnitId)
@@ -39,24 +42,27 @@ namespace API.Data
 
             builder.Entity<Unit>()
                 .HasMany(u => u.Products)
-                
                 .WithOne(p => p.Unit)
-                
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Recipe>()
                 .HasKey(p => p.RecipeId);
+                
 
             builder.Entity<RecipeProduct>()
                 .HasKey(rp => rp.RecipeProductId);
+
             builder.Entity<RecipeProduct>()
                 .HasOne(rp => rp.Recipe)
                 .WithMany(r => r.RecipeProducts)
-                .HasForeignKey(rp => rp.RecipeId);
+                .HasForeignKey(rp => rp.RecipeId)
+                .IsRequired(false);
             builder.Entity<RecipeProduct>()
                 .HasOne(rp => rp.Product)
-                .WithMany(rp => rp.RecipeProducts)
-                .HasForeignKey(rp => rp.ProductId);
+                .WithMany(p => p.RecipeProducts)
+                .HasForeignKey(rp => rp.ProductId)
+                .IsRequired(false);
+                
             
 
 

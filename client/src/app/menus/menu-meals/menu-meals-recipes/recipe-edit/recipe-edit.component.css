@@ -1,0 +1,182 @@
+.background{
+    background-image: url('../../../../../assets/Backgrounds/Bck1.jpg');
+    height: 100vh;
+    width: 100vw;
+    background-size: cover important;
+    /* opacity: 0.9; */
+    overflow-x: hidden;
+    position: absolute; 
+    
+    background-position: center;
+    top:0px;
+    left:0px;
+
+
+}
+
+.add-recipe{
+
+    margin-bottom: 1em;
+
+}
+
+.table {
+    background-color: white;
+    
+}
+
+.add-product{
+
+    margin-bottom: 1em;
+
+}
+
+.container{
+
+    margin-top: 7%;
+}
+
+
+.row{
+    position: fixed;
+    top: 20%;
+    margin-bottom: 1em;
+    
+}
+
+td,th{
+    text-align: center
+}
+
+.img-circle{
+    max-height: 50px;
+}
+
+.table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+button.btn.btn-danger {
+
+    background-color: red;
+    transition: 1s;
+}
+
+
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 0px;
+    height: 30px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.btn-hover.color-2 {
+    background-image: linear-gradient(to right, #25aae1, #409ae4, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+
+.card:hover {
+    /* transform: scale(1.2,1.2); */
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+    opacity: 1;
+
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0,0,0,0);
+}
+
+.card {
+
+    transform: scale(1.0,1.0);
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+    opacity: 0.5;
+}
+
+.card-img-wrapper{
+    overflow: hidden;
+    position: relative;
+}
+
+.member-icons{
+    position: absolute;
+    bottom: -30;
+    left:0;
+    right: 0 ;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+
+}
+
+.card-img-wrapper:hover .member-icons {
+    bottom: 0;
+    opacity:0,5;
+}
+
+.animate {
+    
+    transition: all 0.1s ease-in-out;
+}
+
+@keyframes fa-blink {
+    0% {opacity: 1;}
+    100% {opacity:0.4;}
+}
+
+.is-online {
+    animation: fa-blink 1.5s linear infinite;
+    color: rgb(1,189,42);
+}
+
+

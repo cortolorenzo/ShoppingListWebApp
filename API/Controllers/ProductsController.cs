@@ -58,6 +58,11 @@ namespace API.Controllers
             var product = await unitOfWork.ProductRepository.GetProductByIdAsync(productId);
             unitOfWork.ProductRepository.DeleteProduct(product);
 
+            if ( await unitOfWork.ProductRepository.IsProductUsed(productId))
+                return BadRequest("Product: " + product.ProductName +", is already used in some recipe definition." +
+                
+                " If you want to delete it please firstly delete it from the corresponding recipe.");
+
             if (await unitOfWork.Complete()) return Ok();
 
             return BadRequest("Problem deleting product");

@@ -16,6 +16,8 @@ namespace API.Interfaces
 
          void DeleteProduct(Product product);
 
+         Task<bool> IsProductUsed(int productId);
+
          void AddProduct(Product product);
 
          

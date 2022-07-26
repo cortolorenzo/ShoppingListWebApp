@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220726001730_RecipeChange9769")]
+    partial class RecipeChange9769
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -57,25 +59,22 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.RecipeProduct", b =>
                 {
-                    b.Property<int>("RecipeProductId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("RecipeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("RecipeId")
+                    b.Property<int>("RecipeProductId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UnitName")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("RecipeProductId");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("ProductId", "RecipeId");
 
                     b.HasIndex("RecipeId");
 
@@ -110,11 +109,15 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.Product", "Product")
                         .WithMany("RecipeProducts")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Entities.Recipe", "Recipe")
                         .WithMany("RecipeProducts")
-                        .HasForeignKey("RecipeId");
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 
