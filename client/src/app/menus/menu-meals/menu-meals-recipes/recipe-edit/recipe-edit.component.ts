@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/_models/recipe';
 
@@ -9,7 +10,15 @@ import { Recipe } from 'src/app/_models/recipe';
 })
 export class RecipeEditComponent implements OnInit {
 
+  @ViewChild('editForm') editForm:NgForm;
   recipe: Recipe;
+
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
+    if(this.editForm.dirty){
+      $event.returnValue = true;
+    }
+  };
+
 
   constructor(private route: ActivatedRoute,private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -20,6 +29,10 @@ export class RecipeEditComponent implements OnInit {
       this.recipe = data.recipe;
       console.log(this.recipe);
     })
+
+  }
+
+  updateRecipe(){
 
   }
 

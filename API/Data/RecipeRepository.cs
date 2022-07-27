@@ -6,6 +6,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -30,7 +31,8 @@ namespace API.Data
             throw new NotImplementedException();
         }
 
-        public async Task<RecipeDto?> GetRecipeByIdAsync(int productId)
+        [HttpGet("recipeId")]
+        public async Task<RecipeDto?> GetRecipeByIdAsync(int recipeId)
         {
            throw new NotImplementedException();
         }

@@ -6,6 +6,7 @@ import { MenuMakeListComponent } from './menus/menu-make-list/menu-make-list.com
 import { MenuMealsProductsComponent } from './menus/menu-meals/menu-meals-products/menu-meals-products.component';
 import { MenuMealsRecipesComponent } from './menus/menu-meals/menu-meals-recipes/menu-meals-recipes.component';
 import { RecipeEditComponent } from './menus/menu-meals/menu-meals-recipes/recipe-edit/recipe-edit.component';
+import { RecipeDetailedResolver } from './_resolvers/recipe-detailed.resolver';
 
 const routes: Routes = [
   {path: '', component: MenuMainComponent},
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: 'makelist', component: MenuMakeListComponent},
   {path: 'products', component: MenuMealsProductsComponent},
   {path: 'recipes', component: MenuMealsRecipesComponent},
-  {path: 'recipes/:recipeId', component: RecipeEditComponent}
+  {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}}
 
 
 

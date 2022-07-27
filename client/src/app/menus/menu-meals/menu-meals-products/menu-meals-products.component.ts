@@ -31,6 +31,7 @@ export class MenuMealsProductsComponent implements OnInit {
 
   loadProducts(){
     this.mealService.getProducts().subscribe((response: any) => {
+      
       console.log(response);
       this.products = response;
     })
@@ -46,6 +47,7 @@ export class MenuMealsProductsComponent implements OnInit {
 
   loadUnits(){
     this.mealService.getUnits().subscribe((response: any) => {
+      
       this.units = response;
       
     })
