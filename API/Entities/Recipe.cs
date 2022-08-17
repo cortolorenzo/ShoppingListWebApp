@@ -22,6 +22,7 @@ namespace API.Entities
         public string RecipeName { get; set; }
         public string? RecipeDescription { get; set; }
         
+        public ICollection<Photo> Photos { get; set; }
 
        
 

@@ -32,11 +32,11 @@ namespace API.Data
         }
 
         
-        public async Task<RecipeDto> GetRecipeByIdAsync(int recipeId)
+        public async Task<Recipe> GetRecipeByIdAsync(int recipeId)
         {
-            var recipe = await _dataContext.Recipes.FindAsync(recipeId);
+            return await _dataContext.Recipes.FindAsync(recipeId);
             
-            return _mapper.Map<RecipeDto>(recipe);
+            
         }
 
         public async Task<IEnumerable<RecipeDto>> GetRecipesAsync()

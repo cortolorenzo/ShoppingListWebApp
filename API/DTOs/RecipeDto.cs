@@ -10,5 +10,9 @@ namespace API.DTOs
         public int RecipeId { get; set; }
         public string RecipeName { get; set; }
         public string RecipeDescription { get; set; }
+
+        public string PhotoUrl { get; set; }
+
+        public ICollection<PhotoDto> Photos { get; set; }
     }
 }
