@@ -27,9 +27,16 @@ export class RecipeService {
 
   getRecipe(recipeId: number){
     console.log(this.recipes);
-    const recipe = this.recipes.find((recipe: Recipe) => recipe.recipeId == recipeId);
-    if (recipe)
-    return of(recipe);
+    if (this.recipes){
+      const recipe = this.recipes.find((recipe: Recipe) => recipe.recipeId == recipeId);
+      if (recipe){
+        return of(recipe);
+      }
+    }
+    
+
+
+    return this.http.get<Recipe>(this.baseUrl + 'recipes/' + recipeId);
   }
 
 

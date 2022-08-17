@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220726003131_RecipeChange4539")]
-    partial class RecipeChange4539
+    [Migration("20220817144328_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,15 +112,11 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.Product", "Product")
                         .WithMany("RecipeProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("API.Entities.Recipe", "Recipe")
                         .WithMany("RecipeProducts")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RecipeId");
 
                     b.Navigation("Product");
 

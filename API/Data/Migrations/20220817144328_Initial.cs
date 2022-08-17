@@ -4,7 +4,7 @@
 
 namespace API.Data.Migrations
 {
-    public partial class RecipeChange35 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,14 +72,12 @@ namespace API.Data.Migrations
                         name: "FK_RecipeProducts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ProductId");
                     table.ForeignKey(
                         name: "FK_RecipeProducts_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
-                        principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RecipeId");
                 });
 
             migrationBuilder.CreateIndex(

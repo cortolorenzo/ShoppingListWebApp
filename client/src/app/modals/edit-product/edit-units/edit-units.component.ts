@@ -42,7 +42,7 @@ export class EditUnitsComponent implements OnInit {
 
   addUnit()
   {
-    if (this.newUnitName.length > 0) 
+    if ( this.newUnitName || this.newUnitName.length > 0) 
     {
       this.mealService.addUnit(this.newUnitName).subscribe((res: any) => {
 

@@ -27,10 +27,10 @@ namespace API.Data
 
             
             
-            // await SeedUnits(dataContext);
-            // await SeedProducts(dataContext);
-            // await SeedRecipes(dataContext);
-            // await SeedRecipesProducts(dataContext);
+            await SeedUnits(dataContext);
+            await SeedProducts(dataContext);
+            await SeedRecipes(dataContext);
+            await SeedRecipesProducts(dataContext);
         }
 
         private static async Task SeedRecipesProducts(DataContext dataContext)
