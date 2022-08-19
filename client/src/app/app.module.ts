@@ -58,7 +58,8 @@ import { PhotoEditorComponent } from './common/photo-editor/photo-editor.compone
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},

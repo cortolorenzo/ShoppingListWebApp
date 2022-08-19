@@ -47,9 +47,9 @@ namespace API.Data
             return recipes;
         }
 
-        public void UpdateRecipe(Recipe product)
+        public void UpdateRecipe(Recipe recipe)
         {
-            throw new NotImplementedException();
+            _dataContext.Entry(recipe).State = EntityState.Modified;
         }
     }
 }

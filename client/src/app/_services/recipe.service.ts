@@ -48,5 +48,9 @@ export class RecipeService {
 
   }
 
+  updateRecipe(recipe: Recipe){
+    return this.http.put(this.baseUrl + 'recipes', recipe);
+  }
+
 
 }

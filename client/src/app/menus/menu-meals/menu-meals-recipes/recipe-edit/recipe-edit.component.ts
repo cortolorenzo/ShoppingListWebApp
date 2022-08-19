@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Recipe } from 'src/app/_models/recipe';
+import { RecipeService } from 'src/app/_services/recipe.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -20,7 +22,7 @@ export class RecipeEditComponent implements OnInit {
   };
 
 
-  constructor(private route: ActivatedRoute,private router: Router) { 
+  constructor(private toastr: ToastrService,private recipeService: RecipeService, private route: ActivatedRoute,private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -33,7 +35,10 @@ export class RecipeEditComponent implements OnInit {
   }
 
   updateRecipe(){
-
+    this.recipeService.updateRecipe(this.recipe).subscribe(() =>{
+      this.toastr.success('Recipe updated')
+      this.editForm.reset(this.recipe);
+    })
   }
 
 }

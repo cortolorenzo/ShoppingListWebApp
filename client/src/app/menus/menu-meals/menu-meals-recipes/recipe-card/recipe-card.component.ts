@@ -15,4 +15,8 @@ export class RecipeCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteRecipe(recipe: Recipe){
+    
+  }
+
 }

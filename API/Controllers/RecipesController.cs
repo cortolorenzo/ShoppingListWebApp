@@ -74,6 +74,19 @@ namespace API.Controllers
 
         }
 
+        [HttpPut]
+        public async Task<ActionResult> UpdateRecipe(RecipeUpdateDto recipeUpdateDto)
+        {
+            var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(recipeUpdateDto.RecipeId);
+            _mapper.Map(recipeUpdateDto,recipe);
+
+            unitOfWork.RecipeRepository.UpdateRecipe(recipe);
+
+            if (await unitOfWork.Complete()) return NoContent();
+            return BadRequest("Failes to update recipe");
+        }
+
+
         [HttpPut("{recipeId}/set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int recipeId, int photoId)
         {
