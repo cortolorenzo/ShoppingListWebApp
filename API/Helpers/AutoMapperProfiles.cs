@@ -24,7 +24,7 @@ namespace API.Helpers
 
             CreateMap<Photo,PhotoDto>();
 
-            CreateMap<Recipe, RecipeDto>();
+            
             
             CreateMap<RecipeProduct, RecipeProductDto>()
                 // .ForMember(dest => dest.RecipeName, opt => opt.MapFrom(src => src.Recipe.RecipieName))

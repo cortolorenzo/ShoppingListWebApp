@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="card">
-                        <img src="../../../../../assets/user.png" alt="{{recipe.recipeId}}"
+                        <img src="{{ recipe.photoUrl || '../../../../../assets/user.png'}}" alt="{{recipe.recipeId}}"
                         class="cards-img-top img-thumbnail">
                         <div class="card-body">
                             <!-- <div>
@@ -50,7 +50,7 @@
                             </form>
                         </tab>
                         <tab heading='Edit Photos'>
-                            <!-- <app-photo-editor [member]="member"></app-photo-editor> -->
+                            <app-photo-editor [recipe]="recipe"></app-photo-editor>
                         </tab>
                     
                     

@@ -39,5 +39,14 @@ export class RecipeService {
     return this.http.get<Recipe>(this.baseUrl + 'recipes/' + recipeId);
   }
 
+  setMainPhoto(photoId: number, recipeId: number){
+    return this.http.put(this.baseUrl + 'recipes/' + recipeId + '/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number, recipeId: number){
+    return this.http.delete(this.baseUrl + 'recipes/' + recipeId +'/delete-photo/' + photoId)
+
+  }
+
 
 }

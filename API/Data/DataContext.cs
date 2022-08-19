@@ -22,6 +22,8 @@ namespace API.Data
       public DbSet<Product> Products { get; set; }
       public DbSet<Unit> Units { get; set; }
 
+      public DbSet<Photo> Photos { get; set; }
+
       public DbSet<RecipeProduct> RecipeProducts { get; set; }
       public DbSet<Recipe> Recipes { get; set; }
 
@@ -63,7 +65,7 @@ namespace API.Data
                 .HasForeignKey(rp => rp.ProductId)
                 .IsRequired(false);
                 
-            
+
 
 
         

@@ -57,6 +57,7 @@ namespace API.Controllers
 
             if (recipe.Photos.Count == 0)
             {
+                
                 photo.IsMain = true;
             }
 

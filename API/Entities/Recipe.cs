@@ -10,11 +10,12 @@ namespace API.Entities
         public Recipe(string recipieName)
         {
             RecipeName = recipieName;
+            this.Photos = new List<Photo>();
         }
 
         public Recipe()
         {
-            
+            this.Photos = new List<Photo>();
         }
 
 

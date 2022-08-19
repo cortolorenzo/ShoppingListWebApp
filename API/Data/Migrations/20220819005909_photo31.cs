@@ -4,7 +4,7 @@
 
 namespace API.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class photo31 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,28 @@ namespace API.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.UnitId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: false),
+                    RecipeId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,6 +103,11 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Photos_RecipeId",
+                table: "Photos",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_UnitId",
                 table: "Products",
                 column: "UnitId");
@@ -98,6 +125,9 @@ namespace API.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Photos");
+
             migrationBuilder.DropTable(
                 name: "RecipeProducts");
 
