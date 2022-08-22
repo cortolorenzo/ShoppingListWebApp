@@ -13,6 +13,13 @@ namespace API.Entities
             this.Photos = new List<Photo>();
         }
 
+         public Recipe(string recipieName, string? recipeDesc)
+        {
+            RecipeName = recipieName;
+            RecipeDescription = recipeDesc;
+            this.Photos = new List<Photo>();
+        }
+
         public Recipe()
         {
             this.Photos = new List<Photo>();

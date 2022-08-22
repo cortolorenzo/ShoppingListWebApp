@@ -21,14 +21,14 @@ namespace API.Data
             this._dataContext = dataContext;
         }
 
-        public void AddRecipe(Recipe product)
+        public void AddRecipe(Recipe recipe)
         {
-            throw new NotImplementedException();
+            _dataContext.Add(recipe);
         }
 
-        public void DeleteRecipe(Recipe product)
+        public void DeleteRecipe(Recipe recipe)
         {
-            throw new NotImplementedException();
+            _dataContext.Remove(recipe);
         }
 
         

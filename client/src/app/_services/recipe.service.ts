@@ -52,5 +52,8 @@ export class RecipeService {
     return this.http.put(this.baseUrl + 'recipes', recipe);
   }
 
+  deleteRecipe(recipeId: number){
+    return this.http.delete(this.baseUrl + 'recipes/' + recipeId);
+  }
 
 }

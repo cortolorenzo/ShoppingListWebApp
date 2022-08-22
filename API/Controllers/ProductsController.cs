@@ -87,7 +87,7 @@ namespace API.Controllers
             
             if (await unitOfWork.Complete()) 
                 return Ok();
-            return BadRequest("Failed to send message");
+            return BadRequest("Failed to add product");
 
         }
 
