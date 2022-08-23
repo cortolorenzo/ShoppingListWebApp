@@ -4,6 +4,6 @@ export interface Recipe {
     recipeId: number;
     recipeName: string;
     recipeDescription: string;
-    photoUrl: string;
+    photoUrl?: string;
     photos: Photo[];
 }

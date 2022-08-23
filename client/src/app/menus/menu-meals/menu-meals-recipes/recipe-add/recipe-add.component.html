@@ -5,35 +5,20 @@
             <div class="row">
                 <div class="col-4">
                     <div class="card">
-                        <img src="{{ recipe?.photoUrl || '../../../../../assets/user.png'}}" alt="{{recipe?.recipeId}}"
+                        <img src="{{ '../../../../../assets/user.png'}}"
                         class="cards-img-top img-thumbnail">
                         <div class="card-body">
-                            <!-- <div>
-                                <strong>Location:</strong>
-                                <p>{{member.city}}, {{member.country}}</p>
-                            </div>
-                            <div>
-                                <strong>Age:</strong>
-                                <p>{{member.age}}</p>
-                            </div>
-                            <div>
-                                <strong>Member since:</strong>
-                                <p>{{member.created | date: 'dd.MMM.yyyy'}}</p>
-                            </div>
-                            <div>
-                                <strong>Last Active:</strong>
-                                <p>{{member.lastActive | timeago}}</p>
-                            </div> -->
+                         
                         </div>
                         <div class="card-footer">
-                                <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block">{{isEdit ? 'Save changes' : 'Add Recipe'}}</button>
+                                <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block">Add Recipe</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-8" >
                     <tabset class="member-tabset">
                         <tab heading='About'>
-                            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateRecipe()">
+                            <form #editForm="ngForm" id="editForm" (ngSubmit)="addRecipe()">
                                 <h4>Recipe name:</h4>
                                     <textarea class="form-control" [(ngModel)]="recipe.recipeName" name="recipeName" rows="1"></textarea>
                                 <h4 class ="mt-2">Description</h4>
@@ -47,11 +32,17 @@
                                     <label for="city">Country: </label>
                                     <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
                                 </div> -->
+
+                                <div class="row" *ngIf="validationErrors.length > 0">
+                                    <ul class="text-danger">
+                                        <li *ngFor="let error of validationErrors">
+                                            {{error}}
+                                        </li>
+                                    </ul>
+                                </div>
                             </form>
                         </tab>
-                        <tab heading='Edit Photos'>
-                            <app-photo-editor [recipe]="recipe"></app-photo-editor>
-                        </tab>
+               
                     
                     
                     </tabset>

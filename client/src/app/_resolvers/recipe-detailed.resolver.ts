@@ -16,7 +16,8 @@ export class RecipeDetailedResolver implements Resolve<Recipe> {
   constructor(private recipeService: RecipeService){}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Recipe> {
-    console.log(Number(route.paramMap.get('recipeId')));
-    return this.recipeService.getRecipe(Number(route.paramMap.get('recipeId')));
+    const recipeId = Number(route.paramMap.get('recipeId'));
+    if (recipeId)
+      return this.recipeService.getRecipe(Number(route.paramMap.get('recipeId')));
   }
 }

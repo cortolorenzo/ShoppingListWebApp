@@ -1,5 +1,9 @@
 .background{
-    background-image: url('../../../../assets/Backgrounds/Bck1.jpg');
+    background-image: url('../../../../../assets/Backgrounds/Bck1.jpg');
+
+    overflow-x: hidden;
+  
+
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -12,6 +16,37 @@
 
 
 }
+
+.row{
+    background-position: center;
+    background: white; padding: 5%;
+    
+    top: 15%;
+    margin-bottom: 1em;
+    height: 100%;
+    width: 100%;
+    position:relative;
+ 
+}
+.img-thumbnail {
+    margin: 25px;
+    width: 85%;
+    height: 85%;
+}
+
+.card-body{
+    padding: 0 25px;
+}
+
+.card-footer{
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: none;
+}
+
+
+
+
 
 .add-recipe{
 
@@ -36,12 +71,7 @@
 }
 
 
-.row{
-   
-    top: 20%;
-    margin-bottom: 1em;
-    
-}
+
 
 td,th{
     text-align: center
@@ -114,13 +144,7 @@ button.btn.btn-danger {
 
 
 
-.card:hover {
-    /* transform: scale(1.2,1.2); */
-    transition-duration: 300ms;
-    transition-timing-function: ease-out;
-    opacity: 1;
 
-}
 
 .stretched-link::after {
     position: absolute;
@@ -134,18 +158,6 @@ button.btn.btn-danger {
     background-color: rgba(0,0,0,0);
 }
 
-.card {
-
-    transform: scale(1.0,1.0);
-    transition-duration: 300ms;
-    transition-timing-function: ease-out;
-    opacity: 0.5;
-}
-
-.card-img-wrapper{
-    overflow: hidden;
-    position: relative;
-}
 
 .member-icons{
     position: absolute;
@@ -158,10 +170,6 @@ button.btn.btn-danger {
 
 }
 
-.card-img-wrapper:hover .member-icons {
-    bottom: 0;
-    opacity:0,5;
-}
 
 .animate {
     
@@ -177,3 +185,5 @@ button.btn.btn-danger {
     animation: fa-blink 1.5s linear infinite;
     color: rgb(1,189,42);
 }
+
+

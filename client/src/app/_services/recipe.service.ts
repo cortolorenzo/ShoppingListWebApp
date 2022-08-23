@@ -26,7 +26,7 @@ export class RecipeService {
   }
 
   getRecipe(recipeId: number){
-    console.log(this.recipes);
+    // console.log(this.recipes);
     if (this.recipes){
       const recipe = this.recipes.find((recipe: Recipe) => recipe.recipeId == recipeId);
       if (recipe){
@@ -54,6 +54,10 @@ export class RecipeService {
 
   deleteRecipe(recipeId: number){
     return this.http.delete(this.baseUrl + 'recipes/' + recipeId);
+  }
+
+  addRecipe(recipe: any){
+    return this.http.post<number>(this.baseUrl + 'recipes/', recipe);
   }
 
 }

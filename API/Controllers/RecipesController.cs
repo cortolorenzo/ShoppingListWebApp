@@ -98,13 +98,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddRecipe(RecipeUpdateDto recipeUpdateDto)
+        public async Task<ActionResult<int>> AddRecipe(RecipeUpdateDto recipeUpdateDto)
         {
             var recipe = new Recipe(recipeUpdateDto.RecipeName, recipeUpdateDto.RecipeDescription);
             unitOfWork.RecipeRepository.AddRecipe(recipe);
 
             if (await unitOfWork.Complete()) 
-                return Ok();
+                return Ok(recipe.RecipeId);
             return BadRequest("Failed to add recipe");
           
         }

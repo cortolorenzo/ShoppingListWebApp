@@ -14,6 +14,7 @@ export class RecipeEditComponent implements OnInit {
 
   @ViewChild('editForm') editForm:NgForm;
   recipe: Recipe;
+  isEdit: boolean = true;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
     if(this.editForm.dirty){
@@ -27,10 +28,21 @@ export class RecipeEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    this.route.queryParams.subscribe(params => {
+      if (params.isEdit)
+        this.isEdit = params.isEdit;
+    })
+
+    if (this.isEdit)
     this.route.data.subscribe(data => {
       this.recipe = data.recipe;
       console.log(this.recipe);
     })
+   
+
+   
 
   }
 

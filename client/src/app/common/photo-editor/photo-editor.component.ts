@@ -25,6 +25,7 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   fileOverBase(e: any) {
+    console.log('jestem');
     this.hasBaseDropzoneOver = e;
   }
 
