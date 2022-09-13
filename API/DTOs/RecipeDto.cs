@@ -13,6 +13,7 @@ namespace API.DTOs
 
         public string PhotoUrl { get; set; }
 
+        public ICollection<RecipeProductDto> RecipeProducts { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
 }

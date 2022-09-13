@@ -40,9 +40,23 @@ namespace API.Data
  
         }
 
+        public async Task<RecipeDto> GetRecipeDtoByIdAsync(int recipeId)
+        {
+            return await _mapper.ProjectTo<RecipeDto>(_dataContext.Recipes
+            .Include(p => p.Photos)
+            .Include(p => p.RecipeProducts))
+            .FirstOrDefaultAsync(x => x.RecipeId == recipeId);
+ 
+        }
+
+
         public async Task<IEnumerable<RecipeDto>> GetRecipesAsync()
         {
-            var recipes = await _mapper.ProjectTo<RecipeDto>(_dataContext.Recipes.Include(p => p.Photos)).ToListAsync();
+            var recipes = await _mapper.ProjectTo<RecipeDto>
+                (_dataContext.Recipes
+                    .Include(p => p.Photos)
+                    .Include(p => p.RecipeProducts))
+                    .ToListAsync();
             
             return recipes;
         }

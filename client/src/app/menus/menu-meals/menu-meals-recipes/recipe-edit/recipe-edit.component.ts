@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Recipe } from 'src/app/_models/recipe';
+import { RecipeProduct } from 'src/app/_models/recipe-product';
 import { RecipeService } from 'src/app/_services/recipe.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class RecipeEditComponent implements OnInit {
 
   @ViewChild('editForm') editForm:NgForm;
   recipe: Recipe;
+  recipeProducts: RecipeProduct[];
   isEdit: boolean = true;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
@@ -38,6 +40,7 @@ export class RecipeEditComponent implements OnInit {
     if (this.isEdit)
     this.route.data.subscribe(data => {
       this.recipe = data.recipe;
+      this.recipeProducts = data.recipe.recipeProducts;
       console.log(this.recipe);
     })
    

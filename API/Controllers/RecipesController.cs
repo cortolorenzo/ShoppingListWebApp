@@ -35,8 +35,8 @@ namespace API.Controllers
         [HttpGet("{recipeId}", Name = "GetRecipe")]
         public async Task<ActionResult<RecipeDto>> GetRecipe(int recipeId)
         {
-            var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(recipeId);
-            var recipeDto = _mapper.Map<RecipeDto>(recipe);
+            var recipeDto = await unitOfWork.RecipeRepository.GetRecipeDtoByIdAsync(recipeId);
+            //var recipeDto = _mapper.Map<RecipeDto>(recipe);
             
             return Ok(recipeDto);
         }
