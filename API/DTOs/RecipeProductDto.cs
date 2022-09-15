@@ -10,7 +10,7 @@ namespace API.DTOs
         public int RecipeProductId { get; set; }
         
         public string ProductName { get; set; }
-        public string UnitName { get; set; }
+        public string? UnitName { get; set; }
         public double Quantity { get; set; }
     }
 }

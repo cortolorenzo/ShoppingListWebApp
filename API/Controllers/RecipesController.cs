@@ -89,7 +89,17 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateRecipe(RecipeUpdateDto recipeUpdateDto)
         {
             var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(recipeUpdateDto.RecipeId);
-            _mapper.Map(recipeUpdateDto,recipe);
+            recipe.RecipeName = recipeUpdateDto.RecipeName;
+            recipe.RecipeDescription = recipeUpdateDto.RecipeDescription;
+            
+            //_mapper.Map(recipeUpdateDto,recipe);
+            foreach(var rp in recipeUpdateDto.RecipeProducts)
+            {
+                var recipeProduct2Update = await unitOfWork.RecipeRepository.GetRecipeProductByIdAsync(rp.RecipeProductId);
+                _mapper.Map(rp,recipeProduct2Update);
+                unitOfWork.RecipeRepository.UpdateRecipeProduct(recipeProduct2Update);
+
+            }
 
             unitOfWork.RecipeRepository.UpdateRecipe(recipe);
 

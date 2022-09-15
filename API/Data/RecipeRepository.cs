@@ -36,6 +36,7 @@ namespace API.Data
         {
             return await _dataContext.Recipes
             .Include(p => p.Photos)
+            .Include(p => p.RecipeProducts)
             .FirstOrDefaultAsync(x => x.RecipeId == recipeId);
  
         }
@@ -49,6 +50,11 @@ namespace API.Data
  
         }
 
+        public async Task<RecipeProduct> GetRecipeProductByIdAsync(int recipeProductId)
+        {
+             return await _dataContext.RecipeProducts
+            .FirstOrDefaultAsync(x => x.RecipeProductId == recipeProductId);
+        }
 
         public async Task<IEnumerable<RecipeDto>> GetRecipesAsync()
         {
@@ -64,6 +70,11 @@ namespace API.Data
         public void UpdateRecipe(Recipe recipe)
         {
             _dataContext.Entry(recipe).State = EntityState.Modified;
+        }
+
+         public void UpdateRecipeProduct(RecipeProduct recipeProduct)
+        {
+            _dataContext.Entry(recipeProduct).State = EntityState.Modified;
         }
     }
 }

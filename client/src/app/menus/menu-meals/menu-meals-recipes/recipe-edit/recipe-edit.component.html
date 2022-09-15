@@ -26,14 +26,15 @@
                             </div> -->
                         </div>
                         <div class="card-footer">
-                                <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block">{{isEdit ? 'Save changes' : 'Add Recipe'}}</button>
+                                <button [disabled]="!editForm.dirty" type="button" (click)="openEditProductModal()" form = "editForm" class="btn btn-success btn-block">{{isEdit ? 'Save changes' : 'Add Recipe'}}</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-8" >
                     <tabset class="member-tabset">
                         <tab heading='About'>
-                            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateRecipe()">
+                            <!-- <form #editForm="ngForm" id="editForm" (ngSubmit)="updateRecipe()"> -->
+                                <form #editForm="ngForm" id="editForm" >
                                 <h4>Recipe name:</h4>
                                     <textarea class="form-control" [(ngModel)]="recipe.recipeName" name="recipeName" rows="1"></textarea>
                                 <h4 class ="mt-2">Description</h4>
@@ -42,13 +43,12 @@
                                     <div class="add-product">
                                         <!-- <button (click)="openAddProductModal()" class="btn-hover color-2">Add Product</button> -->
                                     </div>
-                                    
-                                    
+
                                     <table class="table table-hover" style="cursor: default">
                                         <thead>
                                             <tr>
                                                 
-                                                <th style="width: 30%">Product</th>
+                                                <th style="width: 30%">Product name</th>
                                                 <th style="width: 20%">Unit</th>
                                                 <th style="width: 20%">Quantity</th>
                                                 <th style="width: 5%"></th>
@@ -56,12 +56,14 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tr *ngFor="let recipeProduct of recipeProducts" >
+                                        <tr *ngFor="let recipeProduct of recipe.recipeProducts; let i = index;" >
                                             
                                             <td>{{recipeProduct.productName}}</td>
                                             <td>{{recipeProduct.unitName}}</td>
-                                            <td>{{recipeProduct.quantity}}</td>
-                                            <td><button (click)="openEditProductModal(product)" class="btn-hover color-1">Edit</button></td>
+                                            <td>
+                                                <input class="form-control" [(ngModel)]="recipeProduct.quantity" type ="number" name="{{recipeProduct.quantity + ' ' +i}}">
+                                            </td>
+                                            <td><button (click)="openEditProductModal()" type="button" class="btn-hover color-1">Edit</button></td>
                                             <td><button (click)="deleteProduct(product.productId, product.productName)" class="btn-hover btn-danger">Delete</button></td>
                                             
                                 

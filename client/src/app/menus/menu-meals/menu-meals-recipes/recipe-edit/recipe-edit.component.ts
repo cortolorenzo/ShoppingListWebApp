@@ -15,7 +15,7 @@ export class RecipeEditComponent implements OnInit {
 
   @ViewChild('editForm') editForm:NgForm;
   recipe: Recipe;
-  recipeProducts: RecipeProduct[];
+  
   isEdit: boolean = true;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
@@ -31,7 +31,6 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.route.queryParams.subscribe(params => {
       if (params.isEdit)
         this.isEdit = params.isEdit;
@@ -40,20 +39,29 @@ export class RecipeEditComponent implements OnInit {
     if (this.isEdit)
     this.route.data.subscribe(data => {
       this.recipe = data.recipe;
-      this.recipeProducts = data.recipe.recipeProducts;
-      console.log(this.recipe);
     })
-   
-
-   
-
   }
 
   updateRecipe(){
+    console.log(this.recipe);
     this.recipeService.updateRecipe(this.recipe).subscribe(() =>{
       this.toastr.success('Recipe updated')
       this.editForm.reset(this.recipe);
+      console.log(this.recipe);
     })
+  }
+
+  openEditProductModal(){
+    
+  
+    this.recipeService.updateRecipe(this.recipe).subscribe(() =>{
+      this.toastr.success('Recipe updated')
+      this.editForm.form.markAsPristine();
+      this.editForm.form.markAsUntouched();
+      
+      console.log(this.recipe);
+    })
+  
   }
 
 }

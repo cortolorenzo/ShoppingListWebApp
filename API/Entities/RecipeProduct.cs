@@ -8,6 +8,8 @@ namespace API.Entities
     public class RecipeProduct
     {
 
+      public RecipeProduct(){}
+
       public RecipeProduct(Recipe recipe, Product product){
         Recipe = recipe;
         Product = product;
