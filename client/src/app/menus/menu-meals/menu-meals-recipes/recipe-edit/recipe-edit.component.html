@@ -26,22 +26,22 @@
                             </div> -->
                         </div>
                         <div class="card-footer">
-                                <button [disabled]="!editForm.dirty" type="button" (click)="openEditProductModal()" form = "editForm" class="btn btn-success btn-block">{{isEdit ? 'Save changes' : 'Add Recipe'}}</button>
+                                <button [disabled]="!editForm.dirty" type="submit" form = "editForm" class="btn btn-success btn-block">{{isEdit ? 'Save changes' : 'Add Recipe'}}</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-8" >
                     <tabset class="member-tabset">
                         <tab heading='About'>
-                            <!-- <form #editForm="ngForm" id="editForm" (ngSubmit)="updateRecipe()"> -->
-                                <form #editForm="ngForm" id="editForm" >
+                            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateRecipe()">
+                                
                                 <h4>Recipe name:</h4>
                                     <textarea class="form-control" [(ngModel)]="recipe.recipeName" name="recipeName" rows="1"></textarea>
                                 <h4 class ="mt-2">Description</h4>
                                     <textarea class="form-control" [(ngModel)]="recipe.recipeDescription" name="recipeDescription" rows="6"></textarea>
                                 <h4 class ="mt-2">Ingridients</h4>
                                     <div class="add-product">
-                                        <!-- <button (click)="openAddProductModal()" class="btn-hover color-2">Add Product</button> -->
+                                        <button (click)="openAddProductModal()" type="button" class="btn-hover color-2">Add Product</button>
                                     </div>
 
                                     <table class="table table-hover" style="cursor: default">
@@ -63,8 +63,8 @@
                                             <td>
                                                 <input class="form-control" [(ngModel)]="recipeProduct.quantity" type ="number" name="{{recipeProduct.quantity + ' ' +i}}">
                                             </td>
-                                            <td><button (click)="openEditProductModal()" type="button" class="btn-hover color-1">Edit</button></td>
-                                            <td><button (click)="deleteProduct(product.productId, product.productName)" class="btn-hover btn-danger">Delete</button></td>
+                                            
+                                            <td><button (click)="deleteProduct(recipeProduct.recipeProductId)" class="btn-hover btn-danger">Delete</button></td>
                                             
                                 
                                         </tr>

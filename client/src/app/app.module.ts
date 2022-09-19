@@ -24,6 +24,7 @@ import { RecipeEditComponent } from './menus/menu-meals/menu-meals-recipes/recip
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './common/photo-editor/photo-editor.component';
 import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe-add/recipe-add.component';
+import { AddRecipeProductComponent } from './modals/add-recipe-product/add-recipe-product.component';
 
 
 
@@ -46,6 +47,7 @@ import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe
     RecipeEditComponent,
     PhotoEditorComponent,
     RecipeAddComponent,
+    AddRecipeProductComponent,
 
 
     

@@ -1,9 +1,13 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { AddRecipeProductComponent } from 'src/app/modals/add-recipe-product/add-recipe-product.component';
+import { Product } from 'src/app/_models/product';
 import { Recipe } from 'src/app/_models/recipe';
 import { RecipeProduct } from 'src/app/_models/recipe-product';
+import { MealsService } from 'src/app/_services/meals.service';
 import { RecipeService } from 'src/app/_services/recipe.service';
 
 @Component({
@@ -15,8 +19,9 @@ export class RecipeEditComponent implements OnInit {
 
   @ViewChild('editForm') editForm:NgForm;
   recipe: Recipe;
-  
+  products: Product[];
   isEdit: boolean = true;
+  bsModalRef: BsModalRef;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
     if(this.editForm.dirty){
@@ -25,7 +30,9 @@ export class RecipeEditComponent implements OnInit {
   };
 
 
-  constructor(private toastr: ToastrService,private recipeService: RecipeService, private route: ActivatedRoute,private router: Router) { 
+  constructor(private toastr: ToastrService,private recipeService: RecipeService
+    , private route: ActivatedRoute,private router: Router
+    , private modalService: BsModalService) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -43,17 +50,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   updateRecipe(){
-    console.log(this.recipe);
-    this.recipeService.updateRecipe(this.recipe).subscribe(() =>{
-      this.toastr.success('Recipe updated')
-      this.editForm.reset(this.recipe);
-      console.log(this.recipe);
-    })
-  }
-
-  openEditProductModal(){
-    
-  
     this.recipeService.updateRecipe(this.recipe).subscribe(() =>{
       this.toastr.success('Recipe updated')
       this.editForm.form.markAsPristine();
@@ -61,7 +57,25 @@ export class RecipeEditComponent implements OnInit {
       
       console.log(this.recipe);
     })
-  
+  }
+
+
+
+  openAddProductModal(){
+
+   const config = {
+    class: 'modal-dialog-centered',
+    initialState:{}
+  }
+  this.bsModalRef = this.modalService.show(AddRecipeProductComponent, config);
+  this.bsModalRef.content.addSelectedProducts.subscribe( productsToAdd => {
+      console.log(productsToAdd);
+  })
+
+  }
+
+  deleteProduct(recipeProductId: number){
+
   }
 
 }
