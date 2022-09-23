@@ -33,7 +33,7 @@ export class AddRecipeProductComponent implements OnInit {
     if (!this.products){
       this.mealService.getProducts().subscribe((response: any) => {
         
-        console.log(response);
+        //console.log(response);
         this.products = response;
 
         return this.products;

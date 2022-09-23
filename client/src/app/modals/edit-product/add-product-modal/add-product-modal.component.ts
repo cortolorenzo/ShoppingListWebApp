@@ -35,12 +35,16 @@ export class AddProductModalComponent implements OnInit {
     const product: any = 
     [
       {name: 'productName', value: this.productName},
-      {name: 'unitName', value: this.unitName},
-      {name: 'cancelled', value: cancelled ? 1 : 0}
+      {name: 'unitName', value: this.unitName}
+      // ,{name: 'cancelled', value: cancelled ? 1 : 0}
       
     ];
 
     this.addNewProduct.emit(product);
+    this.bsModalRef.hide();
+  }
+
+  cancel(){
     this.bsModalRef.hide();
   }
 

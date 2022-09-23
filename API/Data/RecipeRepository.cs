@@ -26,9 +26,20 @@ namespace API.Data
             _dataContext.Add(recipe);
         }
 
+        public void AddRecipeProduct(RecipeProduct recipeProduct)
+        {
+            _dataContext.Add(recipeProduct);
+        }
+
+        
         public void DeleteRecipe(Recipe recipe)
         {
             _dataContext.Remove(recipe);
+        }
+
+        public void DeleteRecipeProduct(RecipeProduct recipeProduct)
+        {
+            _dataContext.Remove(recipeProduct);
         }
 
         

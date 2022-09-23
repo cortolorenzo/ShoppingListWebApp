@@ -12,14 +12,18 @@ namespace API.Interfaces
         Task<IEnumerable<RecipeDto>> GetRecipesAsync();
     
          Task<Recipe> GetRecipeByIdAsync(int productId);
-         Task<RecipeProduct> GetRecipeProductByIdAsync(int productId);
+    
+         Task<RecipeProduct> GetRecipeProductByIdAsync(int recipeProductId);
          Task<RecipeDto> GetRecipeDtoByIdAsync(int productId);
          void UpdateRecipe(Recipe recipe);
          void UpdateRecipeProduct(RecipeProduct recipe);
 
          void DeleteRecipe(Recipe recipe);
+         void DeleteRecipeProduct(RecipeProduct recipeProduct);
 
          void AddRecipe(Recipe recipe);
+
+        void AddRecipeProduct(RecipeProduct recipeProduct);
 
 
          

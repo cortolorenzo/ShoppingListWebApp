@@ -81,9 +81,9 @@ export class MenuMealsProductsComponent implements OnInit {
     this.bsModalRef = this.modalService.show(AddProductModalComponent, config);
     this.bsModalRef.content.units = this.units;
     this.bsModalRef.content.addNewProduct.subscribe((values: any[]) => {
-      if (values.find(x => x.name == "cancelled").value == 1)
-        return;
-      else
+      // if (values.find(x => x.name == "cancelled").value == 1)
+      //   return;
+      // else
       {
         const newProduct: Product = {
           productId:  0,

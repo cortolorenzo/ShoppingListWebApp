@@ -56,8 +56,17 @@ export class RecipeService {
     return this.http.delete(this.baseUrl + 'recipes/' + recipeId);
   }
 
+  deleteRecipeProduct(recipeId: number){
+    return this.http.delete(this.baseUrl + 'recipes/del-recipe-product/' + recipeId);
+  }
+
   addRecipe(recipe: any){
     return this.http.post<number>(this.baseUrl + 'recipes/', recipe);
+  }
+
+
+  addRecipeProducts(recipeProducts: any[]){
+    return this.http.post<number>(this.baseUrl + 'recipes/add-recipe-products/', recipeProducts);
   }
 
 }

@@ -48,28 +48,56 @@
                                         <thead>
                                             <tr>
                                                 
-                                                <th style="width: 30%">Product name</th>
-                                                <th style="width: 20%">Unit</th>
+                                                <th style="width: 40%">Product name</th>
+                                                <th style="width: 30%">Unit Name</th>
                                                 <th style="width: 20%">Quantity</th>
                                                 <th style="width: 5%"></th>
-                                                <th style="width: 5%"></th>
+                                                
                                                 
                                             </tr>
                                         </thead>
                                         <tr *ngFor="let recipeProduct of recipe.recipeProducts; let i = index;" >
                                             
                                             <td>{{recipeProduct.productName}}</td>
-                                            <td>{{recipeProduct.unitName}}</td>
+                                            
+                                            <td>
+
+                                            <div class="btn-group" dropdown>
+                                                <textarea name="{{unitName + '' + i}}" readonly [(ngModel)]="recipeProduct.unitName" rows="1" class="form-control">{{recipeProduct.unitName}}</textarea>
+                                                <button id="button-split" type="button" dropdownToggle class="btn btn-default dropdown-toggle dropdown-toggle-split"
+                                                        aria-controls="dropdown-split">
+                                                  <span class="caret"></span>
+                                                  <span class="sr-only visually-hidden">Split button!</span>
+                                                </button>
+
+                                            <ul id="dropdown-split" *dropdownMenu class="dropdown-menu"
+                                                    role="menu" aria-labelledby="button-split" >
+                                    
+                                                <li role="menuitem" *ngFor="let unit of units">
+                                                    <a class="dropdown-item" (click)="updateUnitName(unit.unitName, i)">{{unit.unitName}}</a>
+                                                </li>
+                                        
+                                                <!-- <li class="divider dropdown-divider"></li> -->
+                                                <!-- <li role="menuitem"><a class="dropdown-item" (click)="openEditUnitsModal(units)">Edit units</a>  -->
+                                                <!-- </li>  -->
+                                            </ul>
+                                        </div>
+                                            </td>
+
+                                            <!-- <td>{{recipeProduct.unitName}}</td> -->
                                             <td>
                                                 <input class="form-control" [(ngModel)]="recipeProduct.quantity" type ="number" name="{{recipeProduct.quantity + ' ' +i}}">
                                             </td>
                                             
-                                            <td><button (click)="deleteProduct(recipeProduct.recipeProductId)" class="btn-hover btn-danger">Delete</button></td>
+                                            <td><button (click)="deleteRecipeProduct(recipeProduct.recipeProductId)" type = "button" class="btn-hover btn-danger">Delete</button></td>
                                             
                                 
                                         </tr>
                                 
                                     </table>
+                                    <div class="alert alert-info" *ngIf="editForm.dirty">
+                                        <strong>Information: </strong> You have made changes. Any unchanged changes will be lost
+                                    </div>
                             </form>
                         </tab>
                         <tab heading='Edit Photos'>

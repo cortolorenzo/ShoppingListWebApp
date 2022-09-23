@@ -51,7 +51,18 @@ namespace API.Controllers
             return BadRequest("Problem deleting recipe");
         }
 
-     
+        
+        [HttpDelete("del-recipe-product/{recipeProductId}")]
+        public async Task<ActionResult> DeleteRecipeProduct(int recipeProductId)
+        {
+            var recipeProduct = await unitOfWork.RecipeRepository.GetRecipeProductByIdAsync(recipeProductId);
+            unitOfWork.RecipeRepository.DeleteRecipeProduct(recipeProduct);
+
+            if (await unitOfWork.Complete()) return Ok();
+            return BadRequest("Problem deleting recipe product");
+        }
+
+        
 
         [HttpPost("add-photo/{recipeId}")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(int recipeId, IFormFile file)
@@ -119,9 +130,21 @@ namespace API.Controllers
           
         }
 
+        [HttpPost("add-recipe-products")]
+        public async Task<ActionResult> AddRecipeProducts(List<RecipeProductDto> recipeProductDto)
+        {
+            foreach (var rp in recipeProductDto)
+            {
+                RecipeProduct newRp = new RecipeProduct(rp.RecipeId, rp.ProductId, 0.0);
+                newRp.UnitName = rp.UnitName;
+                unitOfWork.RecipeRepository.AddRecipeProduct(newRp);
+            }
 
-
-
+            if (await unitOfWork.Complete()) 
+                return Ok();
+            return BadRequest("Failed to add recipe products");
+          
+        }
 
         [HttpPut("{recipeId}/set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int recipeId, int photoId)
