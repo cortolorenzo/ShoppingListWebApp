@@ -25,6 +25,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './common/photo-editor/photo-editor.component';
 import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe-add/recipe-add.component';
 import { AddRecipeProductComponent } from './modals/add-recipe-product/add-recipe-product.component';
+import { MenuSchedulerComponent } from './menus/menu-scheduler/menu-scheduler.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 
@@ -48,6 +50,7 @@ import { AddRecipeProductComponent } from './modals/add-recipe-product/add-recip
     PhotoEditorComponent,
     RecipeAddComponent,
     AddRecipeProductComponent,
+    MenuSchedulerComponent,
 
 
     
@@ -63,6 +66,7 @@ import { AddRecipeProductComponent } from './modals/add-recipe-product/add-recip
     ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule,
+    CarouselModule.forRoot(),
     
   ],
   providers: [

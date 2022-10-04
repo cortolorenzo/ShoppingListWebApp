@@ -8,6 +8,7 @@ import { MenuMealsRecipesComponent } from './menus/menu-meals/menu-meals-recipes
 import { RecipeEditComponent } from './menus/menu-meals/menu-meals-recipes/recipe-edit/recipe-edit.component';
 import { RecipeDetailedResolver } from './_resolvers/recipe-detailed.resolver';
 import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe-add/recipe-add.component';
+import { MenuSchedulerComponent } from './menus/menu-scheduler/menu-scheduler.component';
 
 const routes: Routes = [
   {path: '', component: MenuMainComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'recipes', component: MenuMealsRecipesComponent},
   {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}},
   {path: 'new-recipe', component: RecipeAddComponent},
+  {path: 'scheduler', component: MenuSchedulerComponent},
 
 
 

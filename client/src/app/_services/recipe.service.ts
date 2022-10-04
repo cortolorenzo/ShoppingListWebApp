@@ -25,9 +25,9 @@ export class RecipeService {
     
   }
 
-  getRecipe(recipeId: number){
+  getRecipe(recipeId: number, isReload: boolean){
     // console.log(this.recipes);
-    if (this.recipes){
+    if (this.recipes && !isReload){
       const recipe = this.recipes.find((recipe: Recipe) => recipe.recipeId == recipeId);
       if (recipe){
         return of(recipe);

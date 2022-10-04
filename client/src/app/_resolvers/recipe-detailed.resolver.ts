@@ -18,6 +18,6 @@ export class RecipeDetailedResolver implements Resolve<Recipe> {
   resolve(route: ActivatedRouteSnapshot): Observable<Recipe> {
     const recipeId = Number(route.paramMap.get('recipeId'));
     if (recipeId)
-      return this.recipeService.getRecipe(Number(route.paramMap.get('recipeId')));
+      return this.recipeService.getRecipe(Number(route.paramMap.get('recipeId')), false);
   }
 }

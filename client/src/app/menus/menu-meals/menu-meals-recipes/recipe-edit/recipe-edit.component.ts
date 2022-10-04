@@ -127,6 +127,7 @@ export class RecipeEditComponent implements OnInit {
           recipeProductsToAdd.sort((a, b) => (a.productId < b.productId ? -1 : 1));
           this.recipeService.addRecipeProducts(recipeProductsToAdd).subscribe(() =>{
             this.reloadRecipe();
+            this.toastr.success("Products added");
           })
         }
         else{
@@ -142,7 +143,8 @@ export class RecipeEditComponent implements OnInit {
   }
 
   reloadRecipe(){
-    this.recipeService.getRecipe(this.recipe.recipeId).subscribe(recipe => {
+    this.recipeService.getRecipe(this.recipe.recipeId, true).subscribe(recipe => {
+      //console.log(this.recipe);
       this.recipe = recipe;
     })
   }
