@@ -21,11 +21,11 @@ namespace API.Data
 
       public DbSet<Product> Products { get; set; }
       public DbSet<Unit> Units { get; set; }
-
       public DbSet<Photo> Photos { get; set; }
-
       public DbSet<RecipeProduct> RecipeProducts { get; set; }
       public DbSet<Recipe> Recipes { get; set; }
+      public DbSet<Schedule> Schedules { get; set; }
+      public DbSet<ScheduleRecipe> ScheduleRecipes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -47,9 +47,11 @@ namespace API.Data
                 .WithOne(p => p.Unit)
                 .OnDelete(DeleteBehavior.NoAction);
 
+
+
+
             builder.Entity<Recipe>()
-                .HasKey(p => p.RecipeId);
-                
+                .HasKey(p => p.RecipeId);                
 
             builder.Entity<RecipeProduct>()
                 .HasKey(rp => rp.RecipeProductId);
@@ -65,6 +67,24 @@ namespace API.Data
                 .HasForeignKey(rp => rp.ProductId)
                 .IsRequired(false);
                 
+
+
+
+            builder.Entity<Schedule>()
+                .HasKey(s => s.ScheduleId);
+
+            builder.Entity<ScheduleRecipe>()
+                .HasOne(sr => sr.Schedule)
+                .WithMany(s => s.ScheduleRecipes)
+                .HasForeignKey(sr => sr.ScheduleId)
+                .IsRequired(false);
+
+            builder.Entity<ScheduleRecipe>()
+                .HasOne(sr => sr.Recipe)
+                .WithMany(r => r.ScheduleRecipes)
+                .HasForeignKey(sr => sr.RecipeId)
+                .IsRequired(false);
+
 
 
 

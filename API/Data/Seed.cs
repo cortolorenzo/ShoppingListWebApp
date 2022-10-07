@@ -27,12 +27,39 @@ namespace API.Data
 
             
             
-            await SeedUnits(dataContext);
-            await SeedProducts(dataContext);
-            await SeedRecipes(dataContext);
-            await SeedRecipesProducts(dataContext);
+            //await SeedUnits(dataContext);
+            //await SeedProducts(dataContext);
+            //await SeedRecipes(dataContext);
+            //await SeedRecipesProducts(dataContext);
+            //await SeedSchedule(dataContext);
         }
 
+        private static async Task SeedSchedule(DataContext dataContext)
+        {
+            try
+            {
+                int daysToInsert = 365 * 50; // 50 years
+                int cnt = 1;
+                DateTime dayToAdd = DateTime.Now;
+                dayToAdd = dayToAdd.AddDays(-1);
+
+
+                while (cnt < daysToInsert)
+                {
+                    Schedule schedule = new Schedule(cnt, dayToAdd);
+                    dataContext.Schedules.Add(schedule);
+                    await dataContext.SaveChangesAsync();
+
+                    dayToAdd = dayToAdd.AddDays(1);
+                    cnt++;
+                }
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
         private static async Task SeedRecipesProducts(DataContext dataContext)
         {
             try

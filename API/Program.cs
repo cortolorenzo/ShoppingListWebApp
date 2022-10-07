@@ -39,7 +39,7 @@ namespace API
                 // context.Add(product);
                 // context.SaveChanges();
 
-                var unit1 = context.Units.Where(u => u.UnitId == 2).FirstOrDefault();
+                //var unit1 = context.Units.Where(u => u.UnitId == 2).FirstOrDefault();
                 
                 // context.Remove(unit1);
                 // context.SaveChanges();

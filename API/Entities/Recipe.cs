@@ -35,5 +35,6 @@ namespace API.Entities
        
 
         public  ICollection<RecipeProduct> RecipeProducts { get; set; }
+        public ICollection<ScheduleRecipe> ScheduleRecipes { get; set; }
     }
 }
