@@ -8,6 +8,6 @@ namespace API.Interfaces
 {
     public interface IScheduleRepository
     {
-        Task<ScheduleDto> GetScheduleDtoByDate (DateTime date);
+        Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate (DateTime date);
     }
 }

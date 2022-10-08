@@ -21,10 +21,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{scheduleDate}")]
-        public async Task<ActionResult<ScheduleDto>> GetSchedule(DateTime scheduleDate)
+        public async Task<ActionResult<IEnumerable<ScheduleDto>>> GetSchedule(DateTime scheduleDate)
         {
-            var scheduleDto = await unitOfWork.ScheduleRepository.GetScheduleDtoByDate(scheduleDate);
-            return Ok(scheduleDto);
+            var schedulesDto = await unitOfWork.ScheduleRepository.GetSchedulesDtoByDate(scheduleDate);
+            return Ok(schedulesDto);
         }
 
     }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -21,15 +22,28 @@ namespace API.Data
             _mapper = mapper;
         }
 
-        public async Task<ScheduleDto> GetScheduleDtoByDate(DateTime date)
+        public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(DateTime date)
         {
             
-            var scheduleDto = await _mapper.ProjectTo<ScheduleDto>(from log in _dataContext.Schedules
-                        where log.ScheduleDate.Date == date
-                       select log)
-                       .FirstOrDefaultAsync();
+            var dateMin = date.AddDays(-7);
+            var dateMax = date.AddDays(7);
 
-            return scheduleDto;
+            var query = _dataContext.Schedules.AsQueryable();
+            query = query.Where(d => d.ScheduleDate >= dateMin);
+            query = query.Where(d => d.ScheduleDate <= dateMax);
+            query.OrderBy(o => o.ScheduleId);
+            
+            return await query.ProjectTo<ScheduleDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+            
+            // var scheduleDto = await _mapper.ProjectTo<ScheduleDto>(from log in _dataContext.Schedules
+            //             where log.ScheduleDate.Date == date
+            //            select log)
+            //            .FirstOrDefaultAsync();
+
+            // return scheduleDto;
+
+
               
         }
     }

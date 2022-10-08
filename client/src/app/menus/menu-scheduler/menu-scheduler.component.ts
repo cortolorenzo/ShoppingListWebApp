@@ -15,13 +15,17 @@ import { Schedule } from 'src/app/_models/schedule';
 })
 export class MenuSchedulerComponent implements OnInit {
 
-  schedule: Schedule;
+  schedules: Schedule[];
   dateHeader: string;
+  reload: boolean = true;
+  showCarousel: boolean = true;
   constructor(private schedulesService: SchedulesService, private cdRef:ChangeDetectorRef) { }
 
   ngAfterViewChecked()
   {
     this.cdRef.detectChanges();
+    
+    
   }
 
   private _activeSlideIndex: number = 0;
@@ -31,17 +35,25 @@ export class MenuSchedulerComponent implements OnInit {
   };
 
   set activeSlideIndex(newIndex: number) {
-    console.log('Active slider index would be changed!' + newIndex);
-    console.log('stary index' + this._activeSlideIndex);
+    //console.log('nowy index ' + newIndex);
+    //console.log('stary index ' + this._activeSlideIndex);
     const direction = newIndex - this._activeSlideIndex;
-    if(direction == -2 || direction == 1) {
+    if(direction == -13 ) {
       this.getSchedule(1);
     }
-    else if(direction !== 0){
+    else if(direction == 13){
       this.getSchedule(-1);
     }
-   
+
+   if(this.reload){
+  
+    this._activeSlideIndex = 7;
+    this.reload = false;
+   }
+   else{
     this._activeSlideIndex = newIndex;
+   }
+   
   };
 
 
@@ -52,16 +64,24 @@ export class MenuSchedulerComponent implements OnInit {
   }
 
   getSchedule(addDay: number){
-    
-    let date = new Date(this.schedule.scheduleDate);
-    date.setDate(date.getDate() + addDay)
+    var date;
+    if (addDay == -1){
+      date = new Date(this.schedules[0].scheduleDate);
+      date.setDate(date.getDate() + addDay)
+    } else{
+      date = new Date(this.schedules[13].scheduleDate);
+      date.setDate(date.getDate() + addDay)
+    }
 
+    this.showCarousel = false;
     //console.log(date)
     this.schedulesService.getSchedule(date).subscribe((sch: any) => {
       if(sch){
-        this.schedule = sch;
-        console.log(this.schedule)
-        this.dateFormatted();
+        this.schedules = sch;
+        //console.log(this.schedules)
+        this.reload = true;
+        this.showCarousel = true;
+        
       }
   
     })
@@ -73,15 +93,16 @@ export class MenuSchedulerComponent implements OnInit {
     
     console.log(dateNow)
     this.schedulesService.getSchedule(dateNow).subscribe((sch: any) => {
-      this.schedule = sch;
-      console.log(this.schedule)
-      this.dateFormatted();
+      this.schedules = sch;
+      console.log(this.schedules)
+      this.reload = true;
+      //this.dateFormatted();
     })
   }
 
-  dateFormatted(){
-    this.dateHeader = this.schedulesService.formatViewDate(this.schedule.scheduleDate);
-    console.log(this.dateHeader);
+  dateFormatted(date: Date){
+    return this.schedulesService.formatViewDate(date);
+    // console.log(this.dateHeader);
     
   }
 

@@ -1,22 +1,34 @@
 <div class="background">
     <div class="container" >
-        <carousel [(activeSlide)]="activeSlideIndex" >
-            <slide>
+        <carousel [(activeSlide)]="activeSlideIndex" 
+                    [isAnimated]="true"
+                    *ngIf="showCarousel" >
+            <slide *ngFor="let schedule of schedules; let i = index">
               <div class="day" >
-                    <h2>{{dateHeader}}</h2>
-              </div>  
-              
+                    <h2>{{dateFormatted(schedule.scheduleDate)}}</h2>
+                    <!-- <h1>{{i}}</h1> -->
+                    
+                <form #editForm="ngForm" id="editForm" >
+                <table class="table table-hover" style="cursor: default">
+                    <thead>
+                        <tr>
+                            
+                            <th style="width: 70%">Recipe Name</th>
+                            <th style="width: 10%">Quantity</th>
+
+                        </tr>
+                    </thead>
+                    <tr *ngFor="let recipe of schedule.scheduleRecipes; let j = index;">
+                        <td>{{recipe.recipeName}}</td>
+                        <td>
+                            <input class="form-control"  [(ngModel)]="recipe.quantity" type ="number" name="{{recipe.quantity + ' ' +j}}">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            </div>  
             </slide>
-            <slide>
-                <div class="day" >
-                    <h2>{{dateHeader}}</h2>
-                </div>  
-            </slide>
-            <slide>
-                <div class="day" >
-                    <h2>{{dateHeader}}</h2>
-                </div>  
-            </slide>
+         
      
         </carousel>
     </div>

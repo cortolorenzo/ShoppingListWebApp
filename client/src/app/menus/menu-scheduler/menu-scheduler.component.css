@@ -18,9 +18,13 @@
 }
 
 .day    {
-    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
     
-     height: 700px;
+    
 }
 
 ::ng-deep  .carousel-control-next-icon {
@@ -68,7 +72,17 @@
 }
 
 td,th{
-    text-align: center
+    
+    vertical-align: middle ;
+}
+
+
+h2{
+    margin-bottom: 50px;
+}
+
+tr{
+    text-align: left;
 }
 
 .img-circle{
