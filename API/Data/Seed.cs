@@ -32,6 +32,39 @@ namespace API.Data
             //await SeedRecipes(dataContext);
             //await SeedRecipesProducts(dataContext);
             //await SeedSchedule(dataContext);
+            //await SeedScheduleRecipes(dataContext);
+        }
+
+        private static async Task SeedScheduleRecipes(DataContext dataContext)
+        {
+            try
+            {
+                int cntDays = 1;
+                int cnt = 1;
+
+                while (cntDays <= 150)
+                {
+                    while (cnt < 4)
+                    {
+                        Recipe? recipe = await dataContext.Recipes.FirstOrDefaultAsync(x => x.RecipeId == cnt);
+
+                        ScheduleRecipe scheduleRecipe = new ScheduleRecipe(cntDays,recipe.RecipeId,cnt + 2,recipe.RecipeName);
+                        dataContext.ScheduleRecipes.Add(scheduleRecipe);
+                        cnt++;
+                    }
+
+                    cnt = 1;
+                    cntDays++;
+                }
+
+                await dataContext.SaveChangesAsync();
+               
+
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         private static async Task SeedSchedule(DataContext dataContext)

@@ -10,9 +10,10 @@ namespace API.Interfaces
         IProductRepository ProductRepository {get;}
         IUnitRepository UnitRepository {get;}
         IRecipeRepository RecipeRepository {get;}
+        IScheduleRepository ScheduleRepository {get;}
 
         Task<bool> Complete();
 
-          bool HasChanges();
+        bool HasChanges();
     }
 }

@@ -1,5 +1,5 @@
 import { Photo } from "./photo";
-import { RecipeProduct } from "./recipe-product";
+import { RecipeProduct } from "./recipeProduct";
 
 export interface Recipe {
     recipeId: number;

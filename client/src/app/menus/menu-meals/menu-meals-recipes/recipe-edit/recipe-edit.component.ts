@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AddRecipeProductComponent } from 'src/app/modals/add-recipe-product/add-recipe-product.component';
 import { Product } from 'src/app/_models/product';
 import { Recipe } from 'src/app/_models/recipe';
-import { RecipeProduct } from 'src/app/_models/recipe-product';
+import { RecipeProduct } from 'src/app/_models/recipeProduct';
 import { Unit } from 'src/app/_models/unit';
 import { MealsService } from 'src/app/_services/meals.service';
 import { RecipeService } from 'src/app/_services/recipe.service';

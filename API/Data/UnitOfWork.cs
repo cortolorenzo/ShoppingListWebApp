@@ -21,6 +21,7 @@ namespace API.Data
 
         public IUnitRepository UnitRepository => new UnitRepository(Context, Mapper);
         public IRecipeRepository RecipeRepository => new RecipeRepository(Context, Mapper);
+        public IScheduleRepository ScheduleRepository => new ScheduleRepository(Context, Mapper);
 
          public async Task<bool> Complete()
         {
