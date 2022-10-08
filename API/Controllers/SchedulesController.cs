@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,10 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{scheduleDate}")]
-        public async Task<ActionResult<IEnumerable<ScheduleDto>>> GetSchedule(DateTime scheduleDate)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ScheduleDto>>> GetSchedule([FromQuery] ScheduleParams scheduleParams)
         {
-            var schedulesDto = await unitOfWork.ScheduleRepository.GetSchedulesDtoByDate(scheduleDate);
+            var schedulesDto = await unitOfWork.ScheduleRepository.GetSchedulesDtoByDate(scheduleParams);
             return Ok(schedulesDto);
         }
 

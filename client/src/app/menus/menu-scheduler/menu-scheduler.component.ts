@@ -3,6 +3,7 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
 import { ChangeDetectorRef } from '@angular/core';
 import { SchedulesService } from 'src/app/_services/schedules.service';
 import { Schedule } from 'src/app/_models/schedule';
+import { scheduleParams } from 'src/app/_models/scheduleParams';
 
 @Component({
   selector: 'app-menu-scheduler',
@@ -19,6 +20,8 @@ export class MenuSchedulerComponent implements OnInit {
   dateHeader: string;
   reload: boolean = true;
   showCarousel: boolean = true;
+
+  scheduleParams: scheduleParams;
   constructor(private schedulesService: SchedulesService, private cdRef:ChangeDetectorRef) { }
 
   ngAfterViewChecked()
@@ -38,16 +41,30 @@ export class MenuSchedulerComponent implements OnInit {
     //console.log('nowy index ' + newIndex);
     //console.log('stary index ' + this._activeSlideIndex);
     const direction = newIndex - this._activeSlideIndex;
-    if(direction == -13 ) {
+    if(direction < -1 ) {
+      this.scheduleParams.isInitial = false;
+      this.scheduleParams.loadDirection = 1;
       this.getSchedule(1);
     }
-    else if(direction == 13){
+    else if(direction > 2){
+      this.scheduleParams.isInitial = false;
+      this.scheduleParams.loadDirection = -1;
       this.getSchedule(-1);
     }
 
    if(this.reload){
-  
-    this._activeSlideIndex = 7;
+
+      if(this.scheduleParams.isInitial)
+        this._activeSlideIndex = this.scheduleParams.pageSize/2;
+      else
+      {
+     
+        if (this.scheduleParams.loadDirection == 1)
+          this._activeSlideIndex = this.schedules.length - this.scheduleParams.pageSize/2;
+        else
+          this._activeSlideIndex = this.scheduleParams.pageSize/2 - 1;
+      }
+
     this.reload = false;
    }
    else{
@@ -58,6 +75,8 @@ export class MenuSchedulerComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.scheduleParams = new scheduleParams();
+    this.scheduleParams.pageSize = 14;
     this.getScheduleToday();
 
 
@@ -67,17 +86,19 @@ export class MenuSchedulerComponent implements OnInit {
     var date;
     if (addDay == -1){
       date = new Date(this.schedules[0].scheduleDate);
-      date.setDate(date.getDate() + addDay)
+      //date.setDate(date.getDate() + addDay)
+      this.scheduleParams.date = date;
     } else{
-      date = new Date(this.schedules[13].scheduleDate);
+      date = new Date(this.schedules[this.schedules.length - 1].scheduleDate);
       date.setDate(date.getDate() + addDay)
+      this.scheduleParams.date = date;
     }
 
     this.showCarousel = false;
     //console.log(date)
-    this.schedulesService.getSchedule(date).subscribe((sch: any) => {
+    this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
       if(sch){
-        this.schedules = sch;
+        this.schedules = addDay == 1 ? this.schedules.concat(sch) : sch.concat(this.schedules) ;
         //console.log(this.schedules)
         this.reload = true;
         this.showCarousel = true;
@@ -90,9 +111,13 @@ export class MenuSchedulerComponent implements OnInit {
   getScheduleToday(){
     
     let dateNow = new Date();
+
+    this.scheduleParams.isInitial = true;
+    this.scheduleParams.pageSize = 14;
+    this.scheduleParams.date = dateNow;
     
     console.log(dateNow)
-    this.schedulesService.getSchedule(dateNow).subscribe((sch: any) => {
+    this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
       this.schedules = sch;
       console.log(this.schedules)
       this.reload = true;

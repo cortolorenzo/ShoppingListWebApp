@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -22,20 +23,39 @@ namespace API.Data
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(DateTime date)
+        public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(ScheduleParams scheduleParams)
         {
-            
-            var dateMin = date.AddDays(-7);
-            var dateMax = date.AddDays(7);
-
             var query = _dataContext.Schedules.AsQueryable();
+            DateTime dateMin;
+            DateTime dateMax;
+
+            if (scheduleParams.IsInitial)
+            {
+                 dateMin = scheduleParams.Date.AddDays(-scheduleParams.PageSize/2);
+                 dateMax = scheduleParams.Date.AddDays(scheduleParams.PageSize/2);
+            }
+            else
+            {
+                if(scheduleParams.LoadDirection == 1)
+                {
+                    dateMin = scheduleParams.Date;
+                    dateMax = scheduleParams.Date.AddDays(scheduleParams.PageSize/2);
+                }
+                else
+                {
+                    dateMin = scheduleParams.Date.AddDays(-scheduleParams.PageSize/2);
+                    dateMax = scheduleParams.Date;
+                }
+            }
+
             query = query.Where(d => d.ScheduleDate >= dateMin);
             query = query.Where(d => d.ScheduleDate <= dateMax);
             query.OrderBy(o => o.ScheduleId);
-            
+
             return await query.ProjectTo<ScheduleDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
             
+
             // var scheduleDto = await _mapper.ProjectTo<ScheduleDto>(from log in _dataContext.Schedules
             //             where log.ScheduleDate.Date == date
             //            select log)

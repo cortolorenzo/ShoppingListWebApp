@@ -1,8 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { environment } from 'src/environments/environment';
 import { Schedule } from '../_models/schedule';
+import { scheduleParams } from '../_models/scheduleParams';
+import { getSchedulesParams } from './common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +17,13 @@ export class SchedulesService {
   constructor(private http: HttpClient, private modalService: BsModalService) { }
 
 
-  getSchedule(scheduledate: Date){
+  getSchedule(sP: scheduleParams){
 
-    return this.http.get<Schedule>(this.baseUrl + 'schedules/' + this.formatDate(scheduledate) );
+    //console.log(sP);
+    let httpParams = getSchedulesParams(sP.isInitial,sP.loadDirection,sP.pageSize,sP.date)
+    //console.log(httpParams);
+
+    return this.http.get<Schedule[]>(this.baseUrl + 'schedules', {params: httpParams});
   }
 
   formatDate(date: Date){
