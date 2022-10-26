@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -21,6 +22,16 @@ namespace API.Data
         {
             _dataContext = dataContext;
             _mapper = mapper;
+        }
+
+        public void DeleteScheduleRecipe(ScheduleRecipe scheduleRecipe)
+        {
+            _dataContext.ScheduleRecipes.Remove(scheduleRecipe);
+        }
+
+        public async Task<ScheduleRecipe?> GetScheduleRecipeByIdAsync(int scheduleRecipeId)
+        {
+            return await _dataContext.ScheduleRecipes.FindAsync(scheduleRecipeId);
         }
 
         public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(ScheduleParams scheduleParams)

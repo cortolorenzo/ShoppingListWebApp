@@ -4,6 +4,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { SchedulesService } from 'src/app/_services/schedules.service';
 import { Schedule } from 'src/app/_models/schedule';
 import { scheduleParams } from 'src/app/_models/scheduleParams';
+import { ConfirmService } from 'src/app/_services/confirm.service';
+import { ScheduleRecipe } from 'src/app/_models/scheduleRecipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu-scheduler',
@@ -22,7 +25,8 @@ export class MenuSchedulerComponent implements OnInit {
   showCarousel: boolean = true;
 
   scheduleParams: scheduleParams;
-  constructor(private schedulesService: SchedulesService, private cdRef:ChangeDetectorRef) { }
+  constructor(private schedulesService: SchedulesService, private cdRef:ChangeDetectorRef
+    ,private confirmService: ConfirmService,  private toastr: ToastrService) { }
 
   ngAfterViewChecked()
   {
@@ -105,6 +109,20 @@ export class MenuSchedulerComponent implements OnInit {
         
       }
   
+    })
+  }
+
+  deleteScheduleRecipe(scheduleRecipe: ScheduleRecipe){
+
+    this.confirmService.confirm('Schedule recipe delete', 'Are you sure you want to delete: ' + scheduleRecipe.recipeName).subscribe(result => {
+      if(result) {
+        this.schedulesService.deleteScheduleRecipe(scheduleRecipe.scheduleRecipeId).subscribe(() => {
+          this.schedules[this.activeSlideIndex].scheduleRecipes
+            .splice(this.schedules[this.activeSlideIndex].scheduleRecipes.findIndex(x => x.scheduleRecipeId === scheduleRecipe.scheduleRecipeId),1);
+          this.toastr.success("Product deleted!");
+        });
+
+      }
     })
   }
 

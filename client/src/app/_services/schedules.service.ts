@@ -17,6 +17,12 @@ export class SchedulesService {
   constructor(private http: HttpClient, private modalService: BsModalService) { }
 
 
+  deleteScheduleRecipe(scheduleRecipeId: number){
+    return this.http.delete(this.baseUrl + 'schedules/' + scheduleRecipeId);
+    
+  }
+
+
   getSchedule(sP: scheduleParams){
 
     //console.log(sP);

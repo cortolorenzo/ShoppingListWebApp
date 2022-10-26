@@ -12,10 +12,9 @@
                 <table class="table table-hover" style="cursor: default">
                     <thead>
                         <tr>
-                            
-                            <th style="width: 70%">Recipe Name</th>
+                            <th style="width: 80%">Recipe Name</th>
                             <th style="width: 10%">Quantity</th>
-
+                            <th style="width: 10%"></th>
                         </tr>
                     </thead>
                     <tr *ngFor="let recipe of schedule.scheduleRecipes; let j = index;">
@@ -23,6 +22,7 @@
                         <td>
                             <input class="form-control"  [(ngModel)]="recipe.quantity" type ="number" name="{{recipe.quantity + ' ' +j}}">
                         </td>
+                        <td> <button (click)="deleteScheduleRecipe(recipe)" class="btn-hover btn-danger">Delete</button></td>
                     </tr>
                 </table>
             </form>

@@ -28,5 +28,17 @@ namespace API.Controllers
             return Ok(schedulesDto);
         }
 
+         [HttpDelete("{scheduleRecipeId}")]
+        public async Task<ActionResult> DeleteScheduleRecipe(int scheduleRecipeId)
+        {
+            var scheduleRec = await unitOfWork.ScheduleRepository.GetScheduleRecipeByIdAsync(scheduleRecipeId);
+            unitOfWork.ScheduleRepository.DeleteScheduleRecipe(scheduleRec);
+
+
+            if (await unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Problem deleting schedule recipe");
+        }
+
     }
 }
