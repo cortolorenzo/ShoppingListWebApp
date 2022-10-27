@@ -8,7 +8,12 @@
                     <h2>{{dateFormatted(schedule.scheduleDate)}}</h2>
                     <!-- <h1>{{i}}</h1> -->
                     
-                <form #editForm="ngForm" id="editForm" >
+                <form #editForm="ngForm" id="editForm + {{i}}" (ngSubmit)="updateSchedule()">
+                   
+                    <div class="edit-schedule">
+                        <button (click)="saveChanges()" [disabled]="!editForm.dirty" type="submit"  class="btn btn-success ">Save changes</button>
+                        <button (click)="openAddRecipeModal()" type="button" class="btn-hover color-2 ">Add Recipe</button>
+                    </div>
                 <table class="table table-hover" style="cursor: default">
                     <thead>
                         <tr>
