@@ -19,12 +19,20 @@ namespace API.Entities
             RecipeName = recipeName;
         }
 
+        public ScheduleRecipe(int scheduleId, int recipeId, int quantity)
+        {
+            ScheduleId = scheduleId;
+            RecipeId = recipeId;
+            Quantity = quantity;
+            
+        }
+
         public int ScheduleRecipeId { get; set; }
         public int ScheduleId { get; set; }
         public int RecipeId { get; set; }
         public int Quantity { get; set; }
 
-        public string? RecipeName { get; set; }
+        public string? RecipeName { get; set; } 
 
 
 

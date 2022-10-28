@@ -13,5 +13,6 @@ namespace API.Interfaces
         Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate (ScheduleParams scheduleParams);
         void DeleteScheduleRecipe(ScheduleRecipe scheduleRecipe);
         Task<ScheduleRecipe?> GetScheduleRecipeByIdAsync(int scheduleRecipeId);
+        void AddScheduleRecipe(ScheduleRecipe scheduleRecipe);
     }
 }

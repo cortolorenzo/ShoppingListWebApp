@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Add recipe</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+
+</div>
+
+<div class="modal-body">
+    <form #rolesForm="ngForm" id="productForm">
+        <div class="form-check"*ngFor="let recipe of recipes">
+            <input type="checkbox"
+                class="form-check-input"
+                [checked]="recipe.checked"
+                value="recipe.recipeName"
+                (change)="recipe.checked = !recipe.checked"
+                
+            >
+            <label>{{recipe.recipeName}}</label>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="addRecipes()">Add Recipes</button>
+  </div>

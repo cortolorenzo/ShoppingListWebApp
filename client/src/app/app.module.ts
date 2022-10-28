@@ -27,6 +27,7 @@ import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe
 import { AddRecipeProductComponent } from './modals/add-recipe-product/add-recipe-product.component';
 import { MenuSchedulerComponent } from './menus/menu-scheduler/menu-scheduler.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { SchedulerAddRecipeComponent } from './modals/scheduler-add-recipe/scheduler-add-recipe.component';
 
 
 
@@ -51,6 +52,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     RecipeAddComponent,
     AddRecipeProductComponent,
     MenuSchedulerComponent,
+    SchedulerAddRecipeComponent,
 
 
     

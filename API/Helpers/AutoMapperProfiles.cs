@@ -31,9 +31,13 @@ namespace API.Helpers
                 // .ForMember(dest => dest.RecipeName, opt => opt.MapFrom(src => src.Recipe.RecipieName))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.ProductName));
                 
+                
             
             CreateMap<RecipeProductDto, RecipeProduct>();
             CreateMap<Schedule,ScheduleDto>();
+      
+            
+            
         }
         
         

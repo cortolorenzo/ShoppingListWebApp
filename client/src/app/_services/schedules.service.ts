@@ -17,6 +17,10 @@ export class SchedulesService {
   constructor(private http: HttpClient, private modalService: BsModalService) { }
 
 
+  addScheduleRecipes(scheduleRecipes: any[]){
+    return this.http.post<number>(this.baseUrl + 'schedules/add-schedule-recipes/', scheduleRecipes);
+  }
+
   deleteScheduleRecipe(scheduleRecipeId: number){
     return this.http.delete(this.baseUrl + 'schedules/' + scheduleRecipeId);
     

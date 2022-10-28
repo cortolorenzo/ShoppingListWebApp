@@ -24,6 +24,11 @@ namespace API.Data
             _mapper = mapper;
         }
 
+        public void AddScheduleRecipe(ScheduleRecipe scheduleRecipe)
+        {
+            _dataContext.Add(scheduleRecipe);
+        }
+
         public void DeleteScheduleRecipe(ScheduleRecipe scheduleRecipe)
         {
             _dataContext.ScheduleRecipes.Remove(scheduleRecipe);

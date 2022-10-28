@@ -7,6 +7,9 @@ import { scheduleParams } from 'src/app/_models/scheduleParams';
 import { ConfirmService } from 'src/app/_services/confirm.service';
 import { ScheduleRecipe } from 'src/app/_models/scheduleRecipe';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SchedulerAddRecipeComponent } from 'src/app/modals/scheduler-add-recipe/scheduler-add-recipe.component';
+import { Recipe } from 'src/app/_models/recipe';
 
 @Component({
   selector: 'app-menu-scheduler',
@@ -25,8 +28,11 @@ export class MenuSchedulerComponent implements OnInit {
   showCarousel: boolean = true;
 
   scheduleParams: scheduleParams;
+  bsModalRef: BsModalRef;
+
   constructor(private schedulesService: SchedulesService, private cdRef:ChangeDetectorRef
-    ,private confirmService: ConfirmService,  private toastr: ToastrService) { }
+    ,private confirmService: ConfirmService,  private toastr: ToastrService
+    , private modalService: BsModalService) { }
 
   ngAfterViewChecked()
   {
@@ -103,7 +109,7 @@ export class MenuSchedulerComponent implements OnInit {
     this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
       if(sch){
         this.schedules = addDay == 1 ? this.schedules.concat(sch) : sch.concat(this.schedules) ;
-        //console.log(this.schedules)
+       // console.log(this.schedules)
         this.reload = true;
         this.showCarousel = true;
         
@@ -126,6 +132,24 @@ export class MenuSchedulerComponent implements OnInit {
     })
   }
 
+  reloadCurrentSchedule(){
+    
+    let dateNow = new Date( this.schedules[this.activeSlideIndex].scheduleDate);
+
+    this.scheduleParams.isInitial = true;
+    this.scheduleParams.pageSize = 14;
+    this.scheduleParams.date = dateNow;
+    
+    console.log(dateNow)
+    this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
+      this.schedules = sch;
+      console.log(this.schedules)
+      this.reload = false;
+      //this.dateFormatted();
+    })
+  }
+
+
   getScheduleToday(){
     
     let dateNow = new Date();
@@ -147,6 +171,61 @@ export class MenuSchedulerComponent implements OnInit {
     return this.schedulesService.formatViewDate(date);
     // console.log(this.dateHeader);
     
+  }
+
+  openAddRecipeModal(){
+    const config = {
+      class: 'modal-dialog-centered',
+      initialState:{}
+    }
+    this.bsModalRef = this.modalService.show(SchedulerAddRecipeComponent, config);
+    this.bsModalRef.content.addSelectedRecipes.subscribe( res  => {
+      
+      const recipesToAdd : Recipe[] = res;
+      const scheduleRecipesToAdd : ScheduleRecipe[] = [];
+      var i = recipesToAdd.length
+        while (i--){
+          // if its already on the list then no need to add it
+          let indexFound = this.schedules[this.activeSlideIndex]
+          .scheduleRecipes.findIndex(x => x.recipeId == recipesToAdd[i].recipeId);
+          
+          if (indexFound > -1){
+            recipesToAdd.splice(i, 1);
+          } 
+          else{
+            const scheduleRecipeToAdd : ScheduleRecipe = {
+              scheduleRecipeId: 0,
+              scheduleId: this.schedules[this.activeSlideIndex].scheduleId,
+              recipeId: recipesToAdd[i].recipeId,
+              quantity: 1,
+              recipeName: recipesToAdd[i].recipeName
+            }
+
+            scheduleRecipesToAdd.push(scheduleRecipeToAdd);
+
+
+          }
+        }
+        
+        if(scheduleRecipesToAdd.length > 0){
+
+          scheduleRecipesToAdd.sort((a, b) => (a.recipeId < b.recipeId ? -1 : 1));
+          this.schedulesService.addScheduleRecipes(scheduleRecipesToAdd).subscribe(() =>{
+            this.reloadSchedule();
+            this.toastr.success("Recipes added");
+          })
+        }
+        else{
+          this.toastr.success("Recipes already on the list");
+          return;
+        }
+    
+
+    })
+  }
+
+  reloadSchedule(){
+    this.reloadCurrentSchedule();
   }
 
 }

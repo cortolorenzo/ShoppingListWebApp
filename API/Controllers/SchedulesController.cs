@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -38,6 +39,25 @@ namespace API.Controllers
             if (await unitOfWork.Complete()) return Ok();
 
             return BadRequest("Problem deleting schedule recipe");
+        }
+
+        [HttpPost("add-schedule-recipes")]
+        public async Task<ActionResult> AddScheduleRecipes(List<ScheduleRecipeDto> scheduleRecipes)
+        {
+            foreach (var sr in scheduleRecipes)
+            {
+                ScheduleRecipe newScheduleRecipe = 
+                new ScheduleRecipe(sr.ScheduleId, sr.RecipeId, sr.Quantity, sr.RecipeName);
+                var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(sr.RecipeId);
+                newScheduleRecipe.Recipe = recipe;
+                
+                unitOfWork.ScheduleRepository.AddScheduleRecipe(newScheduleRecipe);
+            }
+
+            if (await unitOfWork.Complete()) 
+                return Ok();
+            return BadRequest("Failed to add recipe products");
+          
         }
 
     }
