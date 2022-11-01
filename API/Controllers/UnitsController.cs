@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UnitDto>>> GetUnits()
         {
-            var units = await unitOfWork.UnitRepository.GetUnitsAsync();
+            var units = await unitOfWork.UnitRepository.GetUnitsAsync(User.GetUserId());
             return Ok(units);
         }
 
@@ -32,10 +33,10 @@ namespace API.Controllers
         [HttpDelete("{unitName}")]
         public async Task<ActionResult> DeleteUnit(string unitName)
         {
-            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName, User.GetUserId());
             unitOfWork.UnitRepository.DeleteUnit(unit);
 
-            if( await unitOfWork.UnitRepository.IsUnitUsed(unitName))
+            if( await unitOfWork.UnitRepository.IsUnitUsed(unitName, User.GetUserId()))
                 return BadRequest("Unit: " + unitName +", is already used in some product definition." +
                 
                 " If you want to delete it please firstly delete the corresponding product.");
@@ -49,11 +50,14 @@ namespace API.Controllers
         [HttpPost("{unitName}")]
         public async Task<ActionResult> AddUnit(string unitName)
         {
-            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(unitName, User.GetUserId());
+            var user = await unitOfWork.UserRepository.GetUserByNameAsync(User.GetUsername());
 
             if (unit == null)
             {
                 unit = new Unit(unitName);
+                unit.User = user;
+                unit.UserId = User.GetUserId();
                 unitOfWork.UnitRepository.AddUnit(unit);
                  
                 if (await unitOfWork.Complete()) 

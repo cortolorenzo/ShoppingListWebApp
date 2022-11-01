@@ -9,7 +9,7 @@ namespace API.Interfaces
 {
     public interface IRecipeRepository
     {
-        Task<IEnumerable<RecipeDto>> GetRecipesAsync();
+        Task<IEnumerable<RecipeDto>> GetRecipesAsync(int UserId);
     
          Task<Recipe> GetRecipeByIdAsync(int productId);
     

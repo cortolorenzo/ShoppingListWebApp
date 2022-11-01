@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -10,7 +11,7 @@ namespace API.Data
     public static class Seed
     {
 
-        public static async Task SeedData(DataContext dataContext)
+        public static async Task SeedData(DataContext dataContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             // if (dataContext.Products.Any())
             //     Clear(dataContext.Products);
@@ -31,8 +32,25 @@ namespace API.Data
             //await SeedProducts(dataContext);
             //await SeedRecipes(dataContext);
             //await SeedRecipesProducts(dataContext);
-            await SeedSchedule(dataContext);
+            //await SeedSchedule(dataContext);
             //await SeedScheduleRecipes(dataContext);
+            //await SeedRoles(dataContext, roleManager );
+        }
+
+        private static async Task SeedRoles(DataContext dataContext, RoleManager<AppRole> roleManager)
+        {
+                var roles = new List<AppRole>
+             {
+                 new AppRole{Name = "Member"},
+                 new AppRole{Name = "Admin"},
+                 new AppRole{Name = "Moderator"}
+
+             };
+
+             foreach (var role in roles)
+             {
+                 await roleManager.CreateAsync(role);
+             }
         }
 
         private static async Task SeedScheduleRecipes(DataContext dataContext)

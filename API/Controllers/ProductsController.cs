@@ -7,6 +7,7 @@ using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -24,7 +25,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            var products = await unitOfWork.ProductRepository.GetProductsAsync();
+
+            var products = await unitOfWork.ProductRepository.GetProductsAsync(User.GetUserId());
             return Ok(products);
         }
 
@@ -33,10 +35,14 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateProduct(ProductDto productDto)
         {
             //check if new unit was added
-            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName, User.GetUserId());
+            var user = await unitOfWork.UserRepository.GetUserByNameAsync(User.GetUsername());
+
             if (unit == null)
             {
                 unit = new Unit(productDto.UnitName);
+                unit.User = user;
+                unit.UserId = User.GetUserId();
                 unitOfWork.UnitRepository.AddUnit(unit);
             }
             
@@ -72,16 +78,21 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddProduct(ProductDto productDto)
         {
-            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName);
+            var unit = await unitOfWork.UnitRepository.GetUnitByUnitName(productDto.UnitName, User.GetUserId());
+            var user = await unitOfWork.UserRepository.GetUserByNameAsync(User.GetUsername());
 
             if (unit == null)
             {
                 unit = new Unit(productDto.UnitName);
+                unit.User = user;
+                unit.UserId = User.GetUserId();
                 unitOfWork.UnitRepository.AddUnit(unit);
             }
                 
             
             var product = new Product(productDto.ProductName, unit);
+            product.User = user;
+            product.UserId = User.GetUserId();
            
             unitOfWork.ProductRepository.AddProduct(product);
             

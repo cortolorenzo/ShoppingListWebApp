@@ -22,6 +22,7 @@ namespace API.Entities
         public DateTime ScheduleDate { get; set; }
         public ICollection<ScheduleRecipe> ScheduleRecipes { get; set; }
 
+
         
 
        

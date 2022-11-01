@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipeDto>>> GetRecipes()
         {
-            var recipes = await unitOfWork.RecipeRepository.GetRecipesAsync();
+            var recipes = await unitOfWork.RecipeRepository.GetRecipesAsync(User.GetUserId());
             return Ok(recipes);
         }
 
@@ -44,7 +45,12 @@ namespace API.Controllers
         [HttpDelete("{recipeId}")]
         public async Task<ActionResult> DeleteRecipe(int recipeId)
         {
+            if  (await unitOfWork.ScheduleRepository.IsRecipeUsed(recipeId))
+                return BadRequest("Can't delete recipe that is used within schedule");
+            
             var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(recipeId);
+            
+
             unitOfWork.RecipeRepository.DeleteRecipe(recipe);
 
             if (await unitOfWork.Complete()) return Ok();
@@ -119,9 +125,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> AddRecipe(RecipeUpdateDto recipeUpdateDto)
+        public async Task<ActionResult<int>> AddRecipe(RecipeAddDto recipeUpdateDto)
         {
-            var recipe = new Recipe(recipeUpdateDto.RecipeName, recipeUpdateDto.RecipeDescription);
+            var user = await unitOfWork.UserRepository.GetUserByNameAsync(User.GetUsername());
+            var recipe = new Recipe(recipeUpdateDto.RecipeName, recipeUpdateDto.RecipeDescription, user);
             unitOfWork.RecipeRepository.AddRecipe(recipe);
 
             if (await unitOfWork.Complete()) 

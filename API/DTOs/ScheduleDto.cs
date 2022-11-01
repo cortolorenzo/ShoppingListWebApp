@@ -10,7 +10,7 @@ namespace API.DTOs
     {
         public int ScheduleId { get; set; }
         public DateTime ScheduleDate { get; set; }
-        public ICollection<ScheduleRecipe> ScheduleRecipes { get; set; }
+        public ICollection<ScheduleRecipeDto> ScheduleRecipes { get; set; }
 
         
 

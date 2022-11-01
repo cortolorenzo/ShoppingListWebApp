@@ -7,27 +7,28 @@
               <div class="day" >
                     <h2>{{dateFormatted(schedule.scheduleDate)}}</h2>
                     <!-- <h1>{{i}}</h1> -->
-                    
-                <form #editForm="ngForm" id="editForm + {{i}}" (ngSubmit)="updateSchedule()">
+                
+                    <!-- <form #editForm="ngForm" id="editForm + {{i}}" (ngSubmit)="updateSchedule()"></form> -->
+                <form #editForm="ngForm" id="editForm{{i}}" (ngSubmit)="updateSchedule(editForm)">
                    
                     <div class="edit-schedule">
-                        <button (click)="saveChanges()" [disabled]="!editForm.dirty" type="submit"  class="btn btn-success ">Save changes</button>
+                        <button [disabled]="!editForm.dirty" type="submit"  class="btn btn-success ">Save changes</button>
                         <button (click)="openAddRecipeModal()" type="button" class="btn-hover color-2 ">Add Recipe</button>
                     </div>
                 <table class="table table-hover" style="cursor: default">
                     <thead>
                         <tr>
-                            <th style="width: 80%">Recipe Name</th>
+                            <th style="width: 70%">Recipe Name</th>
                             <th style="width: 10%">Quantity</th>
-                            <th style="width: 10%"></th>
+                            <th style="width: 20%"></th>
                         </tr>
                     </thead>
-                    <tr *ngFor="let recipe of schedule.scheduleRecipes; let j = index;">
+                    <tr class="my-row" *ngFor="let recipe of schedule.scheduleRecipes; let j = index;">
                         <td>{{recipe.recipeName}}</td>
                         <td>
                             <input class="form-control"  [(ngModel)]="recipe.quantity" type ="number" name="{{recipe.quantity + ' ' +j}}">
                         </td>
-                        <td> <button (click)="deleteScheduleRecipe(recipe)" class="btn-hover btn-danger">Delete</button></td>
+                        <td> <button (click)="deleteScheduleRecipe(recipe)"  type="button" class="btn-hover btn-danger">Delete</button></td>
                     </tr>
                 </table>
             </form>

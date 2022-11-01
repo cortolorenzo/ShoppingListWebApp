@@ -26,6 +26,10 @@ export class SchedulesService {
     
   }
 
+  updateSchedule(schedule: Schedule){
+    return this.http.put(this.baseUrl + 'schedules', schedule);
+  }
+
 
   getSchedule(sP: scheduleParams){
 

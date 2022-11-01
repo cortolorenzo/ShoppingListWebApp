@@ -9,28 +9,29 @@ namespace API.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public DataContext Context { get; }
-        public IMapper Mapper { get; }
+        private DataContext context { get; }
+        private IMapper mapper { get; }
         public UnitOfWork(DataContext context, IMapper mapper)
         {
-            this.Mapper = mapper;
-            this.Context = context;
+            this.mapper = mapper;
+            this.context = context;
         }
 
-        public IProductRepository ProductRepository => new ProductRepository(Context, Mapper);
+        public IUserRepository UserRepository => new UserRepository(context, mapper);
+        public IProductRepository ProductRepository => new ProductRepository(context, mapper);
 
-        public IUnitRepository UnitRepository => new UnitRepository(Context, Mapper);
-        public IRecipeRepository RecipeRepository => new RecipeRepository(Context, Mapper);
-        public IScheduleRepository ScheduleRepository => new ScheduleRepository(Context, Mapper);
+        public IUnitRepository UnitRepository => new UnitRepository(context, mapper);
+        public IRecipeRepository RecipeRepository => new RecipeRepository(context, mapper);
+        public IScheduleRepository ScheduleRepository => new ScheduleRepository(context, mapper);
 
          public async Task<bool> Complete()
         {
-            return await Context.SaveChangesAsync() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
         public bool HasChanges()
         {
-            return Context.ChangeTracker.HasChanges();
+            return context.ChangeTracker.HasChanges();
         }
     }
 }

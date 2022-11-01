@@ -20,9 +20,12 @@ namespace API.Data
             this._dataContext = dataContext;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProductsAsync()
+        public async Task<IEnumerable<ProductDto>> GetProductsAsync(int UserId)
         {
-            var products = await _mapper.ProjectTo<ProductDto>(_dataContext.Products).ToListAsync();
+            var products = await _mapper.ProjectTo<ProductDto>(_dataContext.Products)
+            .Where(u => u.UserId == UserId)
+            .OrderBy(p => p.ProductName)
+            .ToListAsync();
             
             return products;
         }

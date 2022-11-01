@@ -1,5 +1,6 @@
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -12,8 +13,8 @@ using System.Threading.Tasks;
 
 namespace API.Data
 {
-    public class DataContext :DbContext /*: IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>
-    , AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>*/
+    public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>
+    , AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public DataContext( DbContextOptions options) : base(options)
         {
@@ -30,6 +31,18 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+             builder.Entity<AppUser>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.User)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
+              builder.Entity<AppRole>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.Role)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
 
 
 
@@ -51,7 +64,8 @@ namespace API.Data
 
 
             builder.Entity<Recipe>()
-                .HasKey(p => p.RecipeId);                
+                .HasKey(p => p.RecipeId)       ;
+                  
 
             builder.Entity<RecipeProduct>()
                 .HasKey(rp => rp.RecipeProductId);
@@ -60,7 +74,9 @@ namespace API.Data
                 .HasOne(rp => rp.Recipe)
                 .WithMany(r => r.RecipeProducts)
                 .HasForeignKey(rp => rp.RecipeId)
-                .IsRequired(false);
+                //.IsRequired(false)
+                .OnDelete(DeleteBehavior.ClientCascade); // When I delete Recipe RecipeProducct will also be deleted
+                
             builder.Entity<RecipeProduct>()
                 .HasOne(rp => rp.Product)
                 .WithMany(p => p.RecipeProducts)

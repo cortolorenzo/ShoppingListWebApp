@@ -39,7 +39,7 @@ namespace API.Data
             return await _dataContext.ScheduleRecipes.FindAsync(scheduleRecipeId);
         }
 
-        public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(ScheduleParams scheduleParams)
+        public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(ScheduleParams scheduleParams, int UserId)
         {
             var query = _dataContext.Schedules.AsQueryable();
             DateTime dateMin;
@@ -64,9 +64,12 @@ namespace API.Data
                 }
             }
 
-            query = query.Where(d => d.ScheduleDate >= dateMin);
-            query = query.Where(d => d.ScheduleDate <= dateMax);
+            query = query.Where(d => d.ScheduleDate.Date >= dateMin.Date);
+            query = query.Where(d => d.ScheduleDate.Date <= dateMax.Date);
+            query = query.Where(u => u.ScheduleRecipes
+                            .Where(r => r.Recipe.UserId == UserId).Count() > 0);
             query.OrderBy(o => o.ScheduleId);
+
 
             return await query.ProjectTo<ScheduleDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
@@ -82,5 +85,21 @@ namespace API.Data
 
               
         }
+
+        public async Task<bool> IsRecipeUsed(int recipeId)
+        {
+            var schedulesWithRecipe = await _dataContext.ScheduleRecipes
+                                    .Where(x => x.RecipeId == recipeId)
+                                    .ToListAsync();
+            if (schedulesWithRecipe.Any())
+                return true;
+            return false;
+        }
+
+        public void UpdateScheduleRecipe(ScheduleRecipe recipe)
+        {
+            _dataContext.Entry(recipe).State = EntityState.Modified;
+        }
+
     }
 }

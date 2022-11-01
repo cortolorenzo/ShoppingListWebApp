@@ -9,5 +9,6 @@ namespace API.DTOs
     {
         public int UnitId { get; set; }
         public string? UnitName { get; set; }
+        public int UserId { get; set; }
     }
 }

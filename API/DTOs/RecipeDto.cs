@@ -15,5 +15,6 @@ namespace API.DTOs
 
         public ICollection<RecipeProductDto> RecipeProducts { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
+        
     }
 }

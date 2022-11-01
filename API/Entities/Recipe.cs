@@ -13,11 +13,13 @@ namespace API.Entities
             this.Photos = new List<Photo>();
         }
 
-         public Recipe(string recipieName, string? recipeDesc)
+         public Recipe(string recipieName, string? recipeDesc, AppUser user)
         {
             RecipeName = recipieName;
-            RecipeDescription = recipeDesc;
+            RecipeDescription = recipeDesc; 
             this.Photos = new List<Photo>();
+            User = user;
+            UserId = user.Id;
         }
 
         public Recipe()
@@ -36,5 +38,7 @@ namespace API.Entities
 
         public  ICollection<RecipeProduct> RecipeProducts { get; set; }
         public ICollection<ScheduleRecipe> ScheduleRecipes { get; set; }
+        public AppUser User { get; set; }
+        public int UserId { get; set; }
     }
 }

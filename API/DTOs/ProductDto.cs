@@ -11,5 +11,7 @@ namespace API.DTOs
 
         public string? ProductName { get; set; }
         public string? UnitName { get; set; }
+        public int UserId { get; set; }
+        
     }
 }

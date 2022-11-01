@@ -10,11 +10,11 @@ namespace API.Interfaces
     public interface IUnitRepository
     {
         void DeleteUnit(Unit unit);
-        Task<IEnumerable<UnitDto>> GetUnitsAsync();
+        Task<IEnumerable<UnitDto>> GetUnitsAsync(int UserId);
         void AddUnit(Unit unit);
 
-        Task<bool> IsUnitUsed(string unitName);
+        Task<bool> IsUnitUsed(string unitName, int UserId);
 
-        Task <Unit> GetUnitByUnitName(string unitName);
+        Task <Unit> GetUnitByUnitName(string unitName, int UserId);
     }
 }

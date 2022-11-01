@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
 import { ChangeDetectorRef } from '@angular/core';
 import { SchedulesService } from 'src/app/_services/schedules.service';
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SchedulerAddRecipeComponent } from 'src/app/modals/scheduler-add-recipe/scheduler-add-recipe.component';
 import { Recipe } from 'src/app/_models/recipe';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-scheduler',
@@ -21,6 +22,7 @@ import { Recipe } from 'src/app/_models/recipe';
       
 })
 export class MenuSchedulerComponent implements OnInit {
+
 
   schedules: Schedule[];
   dateHeader: string;
@@ -214,6 +216,7 @@ export class MenuSchedulerComponent implements OnInit {
             this.reloadSchedule();
             this.toastr.success("Recipes added");
           })
+          
         }
         else{
           this.toastr.success("Recipes already on the list");
@@ -223,9 +226,33 @@ export class MenuSchedulerComponent implements OnInit {
 
     })
   }
+  updateSchedule(form: NgForm){
+    console.log(form);
+    this.schedulesService.updateSchedule(this.schedules[this.activeSlideIndex])
+              .subscribe(() => {
+                form.form.markAsPristine();
+                form.form.markAsUntouched();
+                
+                this.toastr.success("Schedule updated");
+              })
+  }
 
   reloadSchedule(){
-    this.reloadCurrentSchedule();
+    
+    const params = new scheduleParams();
+    params.isInitial = false;
+    params.pageSize = 0;
+    params.date = new Date(this.schedules[this.activeSlideIndex].scheduleDate);
+
+    console.log(params.date);
+this.showCarousel = false;
+    this.schedulesService.getSchedule(params).subscribe((schedule: any) => {
+      this.schedules[this.activeSlideIndex] = schedule[0];
+      console.log(schedule);
+      console.log(this.schedules);
+      this.showCarousel = true;
+    })
+
   }
 
 }

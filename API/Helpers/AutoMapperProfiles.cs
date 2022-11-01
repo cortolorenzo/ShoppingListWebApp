@@ -35,6 +35,8 @@ namespace API.Helpers
             
             CreateMap<RecipeProductDto, RecipeProduct>();
             CreateMap<Schedule,ScheduleDto>();
+            CreateMap<ScheduleRecipe,ScheduleRecipeDto>();
+            CreateMap<RegisterDto, AppUser>();
       
             
             

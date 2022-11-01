@@ -27,6 +27,7 @@ export class MenuMealsProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
     this.loadUnits();
+    
   }
 
   loadProducts(){

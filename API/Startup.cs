@@ -29,7 +29,7 @@ namespace API
             services.AddCors();
             
             //extension method
-            // services.AddIdentityServices(_config);
+            services.AddIdentityServices(_config);
             // services.AddSignalR(o =>
             // {
             // o.EnableDetailedErrors = true;

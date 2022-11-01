@@ -26,14 +26,14 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<DataContext>();
-                // var userManager = services.GetRequiredService<UserManager<AppUser>>();
-                // var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 // await context.Database.MigrateAsync();
                 // await Seed.SeedUsers(userManager, roleManager);
                 // var unit = new Unit();
                 // unit.UnitName = "kg";
 
-                await Seed.SeedData(context);
+                await Seed.SeedData(context, userManager, roleManager);
                 
                 // var product = new Product("Potato", unit );
                 // context.Add(product);

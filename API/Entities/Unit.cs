@@ -17,5 +17,7 @@ namespace API.Entities
         public string? UnitName { get; set; }
 
       public ICollection<Product> Products { get; set; }
+      public AppUser User { get; set; }
+      public int UserId { get; set; }
     }
 }

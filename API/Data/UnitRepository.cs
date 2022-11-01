@@ -20,9 +20,10 @@ namespace API.Data
             this._dataContext = dataContext;
         }
 
-        public async Task<Unit> GetUnitByUnitName(string unitName)
+        public async Task<Unit> GetUnitByUnitName(string unitName, int UserId)
         {
-            return await _dataContext.Units.SingleOrDefaultAsync(x => x.UnitName == unitName);
+            return await _dataContext.Units.SingleOrDefaultAsync(x => x.UnitName == unitName 
+            && x.UserId == UserId);
         }
 
         public void AddUnit(Unit unit)
@@ -30,9 +31,11 @@ namespace API.Data
             _dataContext.Add(unit);
         }
 
-        public async Task<IEnumerable<UnitDto>> GetUnitsAsync()
+        public async Task<IEnumerable<UnitDto>> GetUnitsAsync(int UserId)
         {
-            var units = await _mapper.ProjectTo<UnitDto>(_dataContext.Units).ToListAsync();
+            var units = await _mapper.ProjectTo<UnitDto>(_dataContext.Units)
+            .Where(u=> u.UserId == UserId)
+            .ToListAsync();
             
             return  units;
         }
@@ -42,10 +45,10 @@ namespace API.Data
             _dataContext.Remove(unit);
         }
 
-        public async Task<bool> IsUnitUsed(string unitName)
+        public async Task<bool> IsUnitUsed(string unitName, int UserId)
         {
             var products = await _dataContext.Products
-                            .Where(x => x.Unit.UnitName == unitName)
+                            .Where(x => x.Unit.UnitName == unitName && x.UserId == UserId)
                             .ToListAsync();
 
             if (products.Any())

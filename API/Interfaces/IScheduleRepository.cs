@@ -10,9 +10,12 @@ namespace API.Interfaces
 {
     public interface IScheduleRepository
     {
-        Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate (ScheduleParams scheduleParams);
+        Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate (ScheduleParams scheduleParams, int UserId);
         void DeleteScheduleRecipe(ScheduleRecipe scheduleRecipe);
         Task<ScheduleRecipe?> GetScheduleRecipeByIdAsync(int scheduleRecipeId);
         void AddScheduleRecipe(ScheduleRecipe scheduleRecipe);
+        void UpdateScheduleRecipe (ScheduleRecipe scheduleRecipe);
+
+        Task<bool> IsRecipeUsed(int recipeId);
     }
 }

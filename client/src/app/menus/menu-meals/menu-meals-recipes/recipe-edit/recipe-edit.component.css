@@ -17,7 +17,11 @@
 
 }
 
-
+.my-row:hover {
+    transition-duration: 00ms;
+ transition-timing-function: ease-out;
+ background-color: whitesmoke;
+}
 
 .row{
     background-position: center;

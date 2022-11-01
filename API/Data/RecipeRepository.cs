@@ -67,10 +67,11 @@ namespace API.Data
             .FirstOrDefaultAsync(x => x.RecipeProductId == recipeProductId);
         }
 
-        public async Task<IEnumerable<RecipeDto>> GetRecipesAsync()
+        public async Task<IEnumerable<RecipeDto>> GetRecipesAsync(int UserId)
         {
             var recipes = await _mapper.ProjectTo<RecipeDto>
                 (_dataContext.Recipes
+                    .Where(u => u.UserId == UserId)
                     .Include(p => p.Photos)
                     .Include(p => p.RecipeProducts))
                     .ToListAsync();

@@ -9,9 +9,11 @@ import { RecipeEditComponent } from './menus/menu-meals/menu-meals-recipes/recip
 import { RecipeDetailedResolver } from './_resolvers/recipe-detailed.resolver';
 import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe-add/recipe-add.component';
 import { MenuSchedulerComponent } from './menus/menu-scheduler/menu-scheduler.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: MenuMainComponent},
+  {path: '', component: HomeComponent},
+  {path: 'menu', component: MenuMainComponent},
   {path: 'meals'   , component: MenuMealsComponent},
   {path: 'makelist', component: MenuMakeListComponent},
   {path: 'products', component: MenuMealsProductsComponent},
