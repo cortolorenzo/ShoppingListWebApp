@@ -67,7 +67,7 @@ namespace API.Data
             query = query.Where(d => d.ScheduleDate.Date >= dateMin.Date);
             query = query.Where(d => d.ScheduleDate.Date <= dateMax.Date);
             query = query.Where(u => u.ScheduleRecipes
-                            .Where(r => r.Recipe.UserId == UserId).Count() > 0);
+                            .Where(r => r.Recipe.UserId == UserId).Count() >= 0);
             query.OrderBy(o => o.ScheduleId);
 
 
