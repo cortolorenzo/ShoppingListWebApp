@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
     , private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    this.initializeForm();
   }
 
   initializeForm(){
@@ -50,13 +51,13 @@ export class RegisterComponent implements OnInit {
   
   register(){
     console.log(this.registerForm.value);
-    this.accountSerice.register(this.registerForm.value).subscribe(res => {
-      this.router.navigateByUrl('/menu')
-    }, error => {
-      this.validationErrors = error;
+    // this.accountSerice.register(this.registerForm.value).subscribe(res => {
+    //   this.router.navigateByUrl('/menu')
+    // }, error => {
+    //   this.validationErrors = error;
 
       
-    })
+    // })
     
   }
 

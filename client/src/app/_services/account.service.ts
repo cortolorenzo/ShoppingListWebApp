@@ -14,7 +14,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User | null>(1)
   currentUser$ = this.currentUserSource.asObservable()
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {console.log("Accoutn service created") }
 
   register(model: any){
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(

@@ -13,24 +13,24 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'menu', component: MenuMainComponent},
-  {path: 'meals'   , component: MenuMealsComponent},
-  {path: 'makelist', component: MenuMakeListComponent},
-  {path: 'products', component: MenuMealsProductsComponent},
-  {path: 'recipes', component: MenuMealsRecipesComponent},
-  {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}},
-  {path: 'new-recipe', component: RecipeAddComponent},
-  {path: 'scheduler', component: MenuSchedulerComponent},
+  {
+    path: '',
+    children : [
+      {path: '', component: HomeComponent},
+      {path: 'menu', component: MenuMainComponent},
+      {path: 'meals'   , component: MenuMealsComponent},
+      {path: 'makelist', component: MenuMakeListComponent},
+      {path: 'products', component: MenuMealsProductsComponent},
+      {path: 'recipes', component: MenuMealsRecipesComponent},
+      {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}},
+      {path: 'new-recipe', component: RecipeAddComponent},
+      {path: 'scheduler', component: MenuSchedulerComponent},
 
+    ]
+  }
 
 
 ];
-
-
-
-
-
-
 
 
 

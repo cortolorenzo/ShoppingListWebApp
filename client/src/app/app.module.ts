@@ -31,6 +31,8 @@ import { SchedulerAddRecipeComponent } from './modals/scheduler-add-recipe/sched
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { AccountService } from './_services/account.service';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
 
@@ -80,6 +82,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
     {provide: HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true},
     [BsModalService]
   ],
   bootstrap: [AppComponent]

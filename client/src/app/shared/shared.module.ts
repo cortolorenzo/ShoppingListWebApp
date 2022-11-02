@@ -4,6 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AccountService } from '../_services/account.service';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FileUploadModule
 
   ],
+ 
 
   exports: [
     BsDropdownModule,
