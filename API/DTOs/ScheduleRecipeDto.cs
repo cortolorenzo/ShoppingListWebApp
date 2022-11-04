@@ -13,5 +13,6 @@ namespace API.DTOs
         public int Quantity { get; set; }
 
         public string? RecipeName { get; set; }
+        public int UserId { get; set; }
     }
 }

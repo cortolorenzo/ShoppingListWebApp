@@ -45,12 +45,15 @@ namespace API.Controllers
         [HttpPost("add-schedule-recipes")]
         public async Task<ActionResult> AddScheduleRecipes(List<ScheduleRecipeDto> scheduleRecipes)
         {
+            var user = await unitOfWork.UserRepository.GetUserByNameAsync(User.GetUsername());
             foreach (var sr in scheduleRecipes)
             {
                 ScheduleRecipe newScheduleRecipe = 
                 new ScheduleRecipe(sr.ScheduleId, sr.RecipeId, sr.Quantity, sr.RecipeName);
                 var recipe = await unitOfWork.RecipeRepository.GetRecipeByIdAsync(sr.RecipeId);
                 newScheduleRecipe.Recipe = recipe;
+                newScheduleRecipe.User = user;
+                newScheduleRecipe.UserId = User.GetUserId();
 
                 unitOfWork.ScheduleRepository.AddScheduleRecipe(newScheduleRecipe);
             }

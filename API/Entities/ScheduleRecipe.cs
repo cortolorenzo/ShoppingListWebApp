@@ -40,6 +40,9 @@ namespace API.Entities
         public Schedule Schedule { get; set; }
          [JsonIgnore]
         public Recipe Recipe { get; set; }
+
+        public AppUser User { get; set; }
+        public int UserId { get; set; }
         
      
     }

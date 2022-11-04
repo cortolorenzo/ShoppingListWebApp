@@ -10,6 +10,7 @@ import { RecipeDetailedResolver } from './_resolvers/recipe-detailed.resolver';
 import { RecipeAddComponent } from './menus/menu-meals/menu-meals-recipes/recipe-add/recipe-add.component';
 import { MenuSchedulerComponent } from './menus/menu-scheduler/menu-scheduler.component';
 import { HomeComponent } from './home/home.component';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,7 @@ const routes: Routes = [
       {path: 'makelist', component: MenuMakeListComponent},
       {path: 'products', component: MenuMealsProductsComponent},
       {path: 'recipes', component: MenuMealsRecipesComponent},
-      {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}},
+      {path: 'recipes/:recipeId', component: RecipeEditComponent, resolve: {recipe: RecipeDetailedResolver}, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'new-recipe', component: RecipeAddComponent},
       {path: 'scheduler', component: MenuSchedulerComponent},
 
