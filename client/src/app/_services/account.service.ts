@@ -61,4 +61,30 @@ export class AccountService {
     return JSON.parse(atob(token.split('.')[1]))
   }
 
+
+  isAuthenticated() {
+    let user: User;
+    
+
+    try {
+      user = JSON.parse(localStorage.getItem('user'));
+      const { exp } = this.getDecodedToken(user.token);
+      const d = new Date(0);
+      d.setUTCSeconds(exp);
+      console.log(d);
+
+
+      //console.log(exp);
+      if (exp < (new Date().getTime() + 1) / 1000) {
+        this.logout();
+
+        return false;
+      }
+    } catch (err) {
+      this.logout();
+      return false;
+    }
+    return true;
+  }
+
 }

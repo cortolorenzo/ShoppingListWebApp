@@ -16,6 +16,8 @@ export class NavComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+     if (this.accountService.isAuthenticated())
+      this.router.navigateByUrl('/menu');
   }
 
   login(){
