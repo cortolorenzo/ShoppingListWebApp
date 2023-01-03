@@ -44,6 +44,9 @@
 
     height: 150px;
     width: 150px;
+
+    position:absolute;
+    top: 35vh;
 }
 
 ::ng-deep .carousel-control-prev-icon {
@@ -51,6 +54,8 @@
     height: 150px;
     width: 150px;
    
+    position:absolute;
+    top: 35vh;
 }
 
 
@@ -66,9 +71,11 @@
 
 }
 
+
 .container{
 
     margin-top: 100px;
+
    
 }
 

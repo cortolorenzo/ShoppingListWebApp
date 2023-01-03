@@ -7,3 +7,30 @@
   @import '~font-awesome/css/font-awesome.css';
 
   
+  .mobile-device-info{
+    display: none;
+
+  }
+  
+  @media (max-width:800px)
+  {
+    .navbar-container{
+      display: none;
+    }
+
+    .body-router{
+      display: none;
+    }
+
+    .mobile-device-info{
+      width: 100%;
+      margin-top: 100px;
+      display: inline-block;
+      text-align: center;
+      
+      
+      
+  
+    }
+
+  }
