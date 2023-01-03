@@ -33,7 +33,9 @@ namespace API
                 // var unit = new Unit();
                 // unit.UnitName = "kg";
 
+                context.Database.Migrate();
                 await Seed.SeedData(context, userManager, roleManager);
+                
                 
                 // var product = new Product("Potato", unit );
                 // context.Add(product);
@@ -60,13 +62,13 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel(kestrelOptions =>
-                    {
-                        kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
-                        {
-                            httpsOptions.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
-                        });
-                    });
+                    // webBuilder.UseKestrel(kestrelOptions =>
+                    // {
+                    //     kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
+                    //     {
+                    //         httpsOptions.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
+                    //     });
+                    // });
                     
                     webBuilder.UseStartup<Startup>();
                 });

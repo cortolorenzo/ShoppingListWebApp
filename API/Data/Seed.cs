@@ -32,7 +32,7 @@ namespace API.Data
             //await SeedProducts(dataContext);
             //await SeedRecipes(dataContext);
             //await SeedRecipesProducts(dataContext);
-            //await SeedSchedule(dataContext);
+            await SeedSchedule(dataContext);
             //await SeedScheduleRecipes(dataContext);
             //await SeedRoles(dataContext, roleManager );
         }
@@ -91,7 +91,8 @@ namespace API.Data
             {
                 int daysToInsert = 365 * 5; // 50 years
                 int cnt = 1;
-                DateTime dayToAdd = DateTime.Now;
+                DateTime dayToAdd = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                
                 dayToAdd = dayToAdd.AddDays(-30);
 
 

@@ -42,25 +42,27 @@ namespace API.Data
         public async Task<IEnumerable<ScheduleDto>> GetSchedulesDtoByDate(ScheduleParams scheduleParams, int UserId)
         {
             
-            DateTime dateMin;
+            DateTime dateMin ;
             DateTime dateMax;
+
+            
 
             if (scheduleParams.IsInitial)
             {
-                 dateMin = scheduleParams.Date.AddDays(-scheduleParams.PageSize/2);
-                 dateMax = scheduleParams.Date.AddDays(scheduleParams.PageSize/2);
+                 dateMin = DateTime.SpecifyKind(scheduleParams.Date.AddDays(-scheduleParams.PageSize/2), DateTimeKind.Utc);
+                 dateMax = DateTime.SpecifyKind(scheduleParams.Date.AddDays(scheduleParams.PageSize/2), DateTimeKind.Utc);
             }
             else
             {
                 if(scheduleParams.LoadDirection == 1)
                 {
-                    dateMin = scheduleParams.Date;
-                    dateMax = scheduleParams.Date.AddDays(scheduleParams.PageSize/2);
+                    dateMin = DateTime.SpecifyKind(scheduleParams.Date, DateTimeKind.Utc);
+                    dateMax = DateTime.SpecifyKind(scheduleParams.Date.AddDays(scheduleParams.PageSize/2), DateTimeKind.Utc);
                 }
                 else
                 {
-                    dateMin = scheduleParams.Date.AddDays(-scheduleParams.PageSize/2);
-                    dateMax = scheduleParams.Date;
+                    dateMin = DateTime.SpecifyKind(scheduleParams.Date.AddDays(-scheduleParams.PageSize/2), DateTimeKind.Utc);
+                    dateMax = DateTime.SpecifyKind(scheduleParams.Date, DateTimeKind.Utc);
                 }
             }
 

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl:  'api/',
+  apiUrl:  'https://shoppinglistapp.fly.dev/api/',
   hubUrl:  'hubs/'
 };

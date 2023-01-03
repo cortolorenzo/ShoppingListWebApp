@@ -36,6 +36,9 @@ namespace API
             // });
 
 
+
+            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -55,14 +58,35 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(policy => policy.WithOrigins("https://localhost:4200")
-                                        .AllowAnyMethod()
-                                        .AllowAnyHeader()
-                                        //.AllowAnyOrigin()
-                                        .AllowCredentials()
 
-                                        
-                                        );
+              var envi = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+              
+
+            if (envi == "Development")
+            {
+                app.UseCors(policy => policy.WithOrigins("https://localhost:4200")
+                                                        .AllowAnyMethod()
+                                                        .AllowAnyHeader()
+                                                        //.AllowAnyOrigin()
+                                                        .AllowCredentials()
+
+                                                        
+                                                        );
+            }
+            else 
+            {
+
+                app.UseCors(policy => policy.WithOrigins("https://shoppinglistapp.mmiszkurka.pl")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                //.AllowAnyOrigin()
+                    .AllowCredentials()
+                    );
+
+            }
+
+
 
 
             app.UseAuthentication();
