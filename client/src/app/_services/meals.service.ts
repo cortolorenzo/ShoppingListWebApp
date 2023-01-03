@@ -57,25 +57,25 @@ export class MealsService {
   }
 
   addProduct(product: Product){
-    console.log("nowy produkt")
+    //console.log("nowy produkt")
     return this.http.post<Product>(this.baseUrl + 'products', product);
   }
 
   addUnit(unitName: string){
-    console.log(unitName)
+    //console.log(unitName)
     return this.http.post(this.baseUrl + 'units/' + unitName, unitName);
   }
 
 
   updateProduct(product: Product){
 
-    console.log("jestem");
+    //console.log("jestem");
     return this.http.put(this.baseUrl + 'products', product)
    
   }
 
   deleteProduct(productId: number){
-    console.log("kasuję: "+ this.baseUrl + 'products/' + productId);
+   // console.log("kasuję: "+ this.baseUrl + 'products/' + productId);
     return this.http.delete(this.baseUrl + 'products/' + productId);
   }
 

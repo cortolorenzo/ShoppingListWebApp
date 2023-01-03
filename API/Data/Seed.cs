@@ -13,6 +13,11 @@ namespace API.Data
 
         public static async Task SeedData(DataContext dataContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
+            try
+            {
+
+            
+            
             // if (dataContext.Products.Any())
             //     Clear(dataContext.Products);
                 
@@ -32,9 +37,13 @@ namespace API.Data
             //await SeedProducts(dataContext);
             //await SeedRecipes(dataContext);
             //await SeedRecipesProducts(dataContext);
-            await SeedSchedule(dataContext);
+            //await SeedSchedule(dataContext);
             //await SeedScheduleRecipes(dataContext);
-            //await SeedRoles(dataContext, roleManager );
+            await SeedRoles(dataContext, roleManager );
+            }
+            catch(Exception ex){
+                
+            }
         }
 
         private static async Task SeedRoles(DataContext dataContext, RoleManager<AppRole> roleManager)

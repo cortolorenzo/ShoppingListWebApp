@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   
   register(){
-    console.log(this.registerForm.value);
+    //console.log(this.registerForm.value);
     this.accountSerice.register(this.registerForm.value).subscribe(res => {
       this.router.navigateByUrl('/menu')
     }, error => {

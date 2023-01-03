@@ -23,12 +23,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(error){
           switch (error.status) {
             case 400:
-              console.log(error)
+              //console.log(error)
              
               if(error.error.errors){
                 const modalStateErrors = [];
                 for (const key in error.error.errors){
-                  console.log(key)
+                  //console.log(key)
                   if (error.error.errors[key]){
                     modalStateErrors.push(error.error.errors[key])
                   }
@@ -54,7 +54,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               break
             default:
               this.toastr.error('Something unexpected went wrong!');
-              console.log(error);
+              //console.log(error);
               break;
           }
         }

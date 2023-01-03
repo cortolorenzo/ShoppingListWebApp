@@ -26,7 +26,7 @@ export class NavComponent implements OnInit {
 
 
       this.router.navigateByUrl('/menu');
-      console.log(response);
+     // console.log(response);
      
     
     })

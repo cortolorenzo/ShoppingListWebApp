@@ -49,7 +49,7 @@ export class EditUnitsComponent implements OnInit {
         this.newUnit = res;
         this.units.push(this.newUnit);
 
-        console.log(res);
+      //  console.log(res);
         
         this.newUnitName = "";
 

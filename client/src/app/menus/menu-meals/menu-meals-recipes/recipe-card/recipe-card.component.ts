@@ -19,7 +19,7 @@ export class RecipeCardComponent implements OnInit {
   }
 
   deleteRecipe(recipe: Recipe){
-    console.log("Im here");
+   // console.log("Im here");
     
     this.deleteRecipeEvent.emit(recipe);
   }  

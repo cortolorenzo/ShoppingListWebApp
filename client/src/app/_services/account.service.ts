@@ -14,7 +14,9 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User | null>(1)
   currentUser$ = this.currentUserSource.asObservable()
 
-  constructor(private http: HttpClient) {console.log("Accoutn service created") }
+  constructor(private http: HttpClient) {
+  //  console.log("Accoutn service created") 
+  }
 
   register(model: any){
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
@@ -71,7 +73,7 @@ export class AccountService {
       const { exp } = this.getDecodedToken(user.token);
       const d = new Date(0);
       d.setUTCSeconds(exp);
-      console.log(d);
+      //console.log(d);
 
 
       //console.log(exp);

@@ -142,10 +142,10 @@ export class MenuSchedulerComponent implements OnInit {
     this.scheduleParams.pageSize = 14;
     this.scheduleParams.date = dateNow;
     
-    console.log(dateNow)
+   // console.log(dateNow)
     this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
       this.schedules = sch;
-      console.log(this.schedules)
+     // console.log(this.schedules)
       this.reload = false;
       //this.dateFormatted();
     })
@@ -160,10 +160,10 @@ export class MenuSchedulerComponent implements OnInit {
     this.scheduleParams.pageSize = 14;
     this.scheduleParams.date = dateNow;
     
-    console.log(dateNow)
+   // console.log(dateNow)
     this.schedulesService.getSchedule(this.scheduleParams).subscribe((sch: any) => {
       this.schedules = sch;
-      console.log(this.schedules)
+     // console.log(this.schedules)
       this.reload = true;
       //this.dateFormatted();
     })
@@ -227,7 +227,7 @@ export class MenuSchedulerComponent implements OnInit {
     })
   }
   updateSchedule(form: NgForm){
-    console.log(form);
+   // console.log(form);
     this.schedulesService.updateSchedule(this.schedules[this.activeSlideIndex])
               .subscribe(() => {
                 form.form.markAsPristine();
@@ -244,12 +244,12 @@ export class MenuSchedulerComponent implements OnInit {
     params.pageSize = 0;
     params.date = new Date(this.schedules[this.activeSlideIndex].scheduleDate);
 
-    console.log(params.date);
+   // console.log(params.date);
 this.showCarousel = false;
     this.schedulesService.getSchedule(params).subscribe((schedule: any) => {
       this.schedules[this.activeSlideIndex] = schedule[0];
-      console.log(schedule);
-      console.log(this.schedules);
+     // console.log(schedule);
+    // console.log(this.schedules);
       this.showCarousel = true;
     })
 

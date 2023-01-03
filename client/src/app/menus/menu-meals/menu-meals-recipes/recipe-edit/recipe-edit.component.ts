@@ -63,7 +63,7 @@ export class RecipeEditComponent implements OnInit {
       this.editForm.form.markAsPristine();
       this.editForm.form.markAsUntouched();
       
-      console.log(this.recipe);
+    //  console.log(this.recipe);
     })
   }
 

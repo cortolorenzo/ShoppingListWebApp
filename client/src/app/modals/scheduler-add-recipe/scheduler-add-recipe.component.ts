@@ -21,7 +21,7 @@ export class SchedulerAddRecipeComponent implements OnInit {
 
   addRecipes(){
     const recipesToAdd = this.recipes.filter(el => el.checked === true);
-    console.log(recipesToAdd)
+ //   console.log(recipesToAdd)
     this.addSelectedRecipes.emit(recipesToAdd);
     this.bsModalRef.hide();
 

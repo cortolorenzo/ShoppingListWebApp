@@ -33,7 +33,7 @@ export class MenuMealsProductsComponent implements OnInit {
   loadProducts(){
     this.mealService.getProducts().subscribe((response: any) => {
       
-      console.log(response);
+   //   console.log(response);
       this.products = response;
     })
 
@@ -42,7 +42,7 @@ export class MenuMealsProductsComponent implements OnInit {
     //   this.products = response;
     // })).subscribe();
 
-    console.log(environment.apiUrl + 'products');
+    //console.log(environment.apiUrl + 'products');
   }
 
 
@@ -99,7 +99,7 @@ export class MenuMealsProductsComponent implements OnInit {
           
 
         });
-        console.log(newProduct);
+        //console.log(newProduct);
       }
     })
     
@@ -126,7 +126,7 @@ export class MenuMealsProductsComponent implements OnInit {
           this.toastr.success("Product updated!");
         });
       
-        console.log(product);
+       // console.log(product);
       }
         
     })

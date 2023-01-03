@@ -35,11 +35,11 @@ export class RecipeAddComponent implements OnInit {
   }
 
   addRecipe(){
-    console.log(this.recipe)
+   // console.log(this.recipe)
     
     this.recipeService.addRecipe(this.recipe).subscribe(recipeId =>{
       this.toastr.success('Recipe added');
-      console.log(recipeId);
+     // console.log(recipeId);
       this.router.navigateByUrl('recipes/' + recipeId)
       
     }, error => {

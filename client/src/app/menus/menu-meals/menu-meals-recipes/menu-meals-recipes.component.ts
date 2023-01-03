@@ -25,7 +25,7 @@ export class MenuMealsRecipesComponent implements OnInit {
   loadRecipes(){
     this.recipeService.getRecipes().subscribe((response: any) => {
       this.recipes = response;
-      console.log(this.recipes );
+     // console.log(this.recipes );
 
     })
 

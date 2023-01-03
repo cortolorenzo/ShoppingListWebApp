@@ -51,7 +51,7 @@ export class AddProductModalComponent implements OnInit {
   openEditUnitsModal(units: Unit[]){
     this.mealService.editUnitsOpenModal(units).subscribe(res =>{
       if(res){
-        console.log("deleted");
+     //   console.log("deleted");
         
       }
     })
