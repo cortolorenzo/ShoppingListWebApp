@@ -8,6 +8,7 @@ using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -22,6 +23,7 @@ namespace API.Controllers
             this._mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
